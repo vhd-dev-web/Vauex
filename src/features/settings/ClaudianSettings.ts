@@ -282,6 +282,7 @@ export class ClaudianSettingTab extends PluginSettingTab {
           const settingsBag = this.plugin.settings as unknown as Record<string, unknown>;
           const seenValues = new Set<string>();
           for (const providerId of ProviderRegistry.getEnabledProviderIds(this.plugin.settings as unknown as Record<string, unknown>)) {
+            if (providerId === 'claude') continue;
             const uiConfig = ProviderRegistry.getChatUIConfig(providerId);
             for (const model of uiConfig.getModelOptions(settingsBag)) {
               if (!seenValues.has(model.value)) {
@@ -481,7 +482,8 @@ export class ClaudianSettingTab extends PluginSettingTab {
     const uniqueModelIds = new Set<string>();
     const providerIds = providerId
       ? [providerId]
-      : ProviderRegistry.getEnabledProviderIds(this.plugin.settings as unknown as Record<string, unknown>);
+      : ProviderRegistry.getEnabledProviderIds(this.plugin.settings as unknown as Record<string, unknown>)
+        .filter(candidateProviderId => candidateProviderId !== 'claude');
 
     for (const targetProviderId of providerIds) {
       const envVars = parseEnvironmentVariables(

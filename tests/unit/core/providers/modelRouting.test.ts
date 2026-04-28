@@ -10,17 +10,17 @@ describe('getProviderForModel', () => {
     expect(getProviderForModel('opus')).toBe('claude');
   });
 
-  it('routes Claude extended models to claude', () => {
-    expect(getProviderForModel('claude-sonnet-4-5-20250514')).toBe('claude');
-    expect(getProviderForModel('claude-opus-4-6-20250616')).toBe('claude');
+  it('routes unknown Claude version ids to the Codex-first default without settings context', () => {
+    expect(getProviderForModel('claude-sonnet-4-5-20250514')).toBe('codex');
+    expect(getProviderForModel('claude-opus-4-6-20250616')).toBe('codex');
   });
 
   it('routes Codex default models to codex', () => {
     expect(getProviderForModel(DEFAULT_CODEX_PRIMARY_MODEL)).toBe('codex');
   });
 
-  it('routes unknown models to claude (default)', () => {
-    expect(getProviderForModel('some-unknown-model')).toBe('claude');
+  it('routes unknown models to codex (default)', () => {
+    expect(getProviderForModel('some-unknown-model')).toBe('codex');
   });
 
   it('routes models starting with gpt- to codex', () => {
@@ -51,8 +51,8 @@ describe('getProviderForModel', () => {
     expect(getProviderForModel('my-custom-model', settings)).toBe('codex');
   });
 
-  it('routes custom OPENAI_MODEL to claude without settings (no context)', () => {
-    expect(getProviderForModel('my-custom-model')).toBe('claude');
+  it('routes custom OPENAI_MODEL to codex without settings (default context)', () => {
+    expect(getProviderForModel('my-custom-model')).toBe('codex');
   });
 
   it('can resolve blank-tab routing within enabled providers only', () => {
@@ -68,7 +68,7 @@ describe('getProviderForModel', () => {
       },
     };
 
-    expect(getProviderForModel(DEFAULT_CODEX_PRIMARY_MODEL, settings)).toBe('codex');
+    expect(getProviderForModel(DEFAULT_CODEX_PRIMARY_MODEL, settings)).toBe('claude');
     expect(getEnabledProviderForModel(DEFAULT_CODEX_PRIMARY_MODEL, settings)).toBe('claude');
   });
 });

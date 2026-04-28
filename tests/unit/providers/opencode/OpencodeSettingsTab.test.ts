@@ -390,7 +390,7 @@ describe('OpencodeSettingsTab', () => {
     expect(createdElements).toContainEqual({
       cls: 'setting-item-description',
       tag: 'p',
-      text: 'OpenCode can auto-detect vault-level Claude slash commands from .claude/commands/ and skills from .claude/skills/, .codex/skills/, and .agents/skills/. Manage those entries in the Claude or Codex settings tab. This setting only hides entries from the OpenCode dropdown.',
+      text: 'OpenCode can auto-detect vault-level commands and skills from .codex/skills/ and .agents/skills/. Manage Codex entries in the Codex settings tab. This setting only hides entries from the OpenCode dropdown.',
     });
   });
 

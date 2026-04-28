@@ -22,7 +22,7 @@ describe('Tab Lifecycle - Model-Driven Provider Routing', () => {
       expect(getProviderForModel('haiku')).toBe('claude');
       expect(getProviderForModel('sonnet')).toBe('claude');
       expect(getProviderForModel('opus')).toBe('claude');
-      expect(getProviderForModel('claude-sonnet-4-5-20250514')).toBe('claude');
+      expect(getProviderForModel('claude-sonnet-4-5-20250514')).toBe('codex');
     });
 
     it('derives codex from Codex model names', () => {
@@ -32,13 +32,13 @@ describe('Tab Lifecycle - Model-Driven Provider Routing', () => {
       expect(getProviderForModel('o4-mini')).toBe('codex');
     });
 
-    it('defaults unknown models to claude', () => {
-      expect(getProviderForModel('custom-model')).toBe('claude');
-      expect(getProviderForModel('')).toBe('claude');
+    it('defaults unknown models to codex', () => {
+      expect(getProviderForModel('custom-model')).toBe('codex');
+      expect(getProviderForModel('')).toBe('codex');
     });
 
     it('does not route "obsidian" to codex (no digit after o)', () => {
-      expect(getProviderForModel('obsidian')).toBe('claude');
+      expect(getProviderForModel('obsidian')).toBe('codex');
     });
   });
 });

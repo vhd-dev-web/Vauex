@@ -551,7 +551,7 @@ describe('ThinkingBudgetSelector', () => {
       const options = parentEl.querySelector('.claudian-thinking-options');
       const gears = options?.children || [];
       const highGear = gears.find((g: any) => g.textContent === 'High');
-      expect(highGear?.getAttribute('title')).toContain('16,000 tokens');
+      expect(highGear?.getAttribute('title')).toMatch(/16[,.]000 tokens/);
     });
 
     it('should set title as Disabled for off budget', () => {

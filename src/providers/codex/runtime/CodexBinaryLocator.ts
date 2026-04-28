@@ -51,7 +51,11 @@ export function findCodexBinaryPath(
     if (!dir) continue;
 
     for (const binaryName of binaryNames) {
-      const candidate = path.join(dir, binaryName);
+      const hostCandidate = path.join(dir, binaryName);
+      if (isExistingFile(hostCandidate)) {
+        return hostCandidate;
+      }
+      const candidate = (platform === 'win32' ? path.win32 : path.posix).join(dir, binaryName);
       if (isExistingFile(candidate)) {
         return candidate;
       }

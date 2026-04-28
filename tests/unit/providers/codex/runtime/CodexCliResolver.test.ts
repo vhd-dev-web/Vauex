@@ -58,6 +58,7 @@ describe('CodexCliResolver', () => {
       { 'other-host': '/other/codex' },
       '',
       'PATH=/custom/bin',
+      { hostPlatform: 'linux' },
     );
 
     expect(resolved).toBe('/custom/bin/codex');

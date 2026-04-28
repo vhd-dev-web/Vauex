@@ -22,7 +22,7 @@ describe('ProviderSettingsCoordinator', () => {
       expect(settings.settingsProvider).toBe('claude');
     });
 
-    it('falls back to claude for unknown providers', () => {
+    it('falls back to codex for unknown providers', () => {
       const settings: Record<string, unknown> = {
         settingsProvider: 'mystery-provider',
         providerConfigs: {
@@ -33,7 +33,7 @@ describe('ProviderSettingsCoordinator', () => {
       const changed = ProviderSettingsCoordinator.normalizeProviderSelection(settings);
 
       expect(changed).toBe(true);
-      expect(settings.settingsProvider).toBe('claude');
+      expect(settings.settingsProvider).toBe('codex');
     });
 
     it('returns false when already normalized (no-op)', () => {
@@ -74,7 +74,7 @@ describe('ProviderSettingsCoordinator', () => {
 
       // Claude reconciler should only receive claude conversations
       expect(reconcileSpy).toHaveBeenCalledWith(
-        settings,
+        expect.objectContaining({ model: 'haiku' }),
         [claudeConv],
       );
 
@@ -208,23 +208,23 @@ describe('ProviderSettingsCoordinator', () => {
       expect(snapshot.serviceTier).toBe('fast');
     });
 
-    it('defaults to claude when settingsProvider is not set', () => {
+    it('defaults to codex when settingsProvider is not set', () => {
       const settings: Record<string, unknown> = {
         model: 'old-model',
         effortLevel: 'low',
         serviceTier: 'default',
         thinkingBudget: '500',
-        savedProviderModel: { claude: 'sonnet' },
-        savedProviderEffort: { claude: 'high' },
-        savedProviderServiceTier: { claude: 'default' },
-        savedProviderThinkingBudget: { claude: 'off' },
+        savedProviderModel: { codex: DEFAULT_CODEX_PRIMARY_MODEL, claude: 'sonnet' },
+        savedProviderEffort: { codex: 'medium', claude: 'high' },
+        savedProviderServiceTier: { codex: 'fast', claude: 'default' },
+        savedProviderThinkingBudget: { codex: 'off', claude: 'off' },
       };
 
       ProviderSettingsCoordinator.projectActiveProviderState(settings);
 
-      expect(settings.model).toBe('sonnet');
-      expect(settings.effortLevel).toBe('high');
-      expect(settings.serviceTier).toBe('default');
+      expect(settings.model).toBe(DEFAULT_CODEX_PRIMARY_MODEL);
+      expect(settings.effortLevel).toBe('medium');
+      expect(settings.serviceTier).toBe('fast');
       expect(settings.thinkingBudget).toBe('off');
     });
 

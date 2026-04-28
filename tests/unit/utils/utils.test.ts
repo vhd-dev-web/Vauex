@@ -206,7 +206,9 @@ describe('utils.ts', () => {
       process.env[envKey] = '/tmp/claudian-test';
 
       try {
-        expect(normalizePathForFilesystem(`$${envKey}/notes/file.md`)).toBe('/tmp/claudian-test/notes/file.md');
+        expect(normalizePathForFilesystem(`$${envKey}/notes/file.md`)).toBe(
+          path.normalize('/tmp/claudian-test/notes/file.md'),
+        );
       } finally {
         if (originalValue === undefined) {
           delete process.env[envKey];
@@ -233,8 +235,8 @@ describe('utils.ts', () => {
 
     it('handles non-existent environment variables', () => {
       // Non-existent env vars should be left as-is
-      expect(normalizePathForFilesystem('$NONEXISTENT/path')).toBe('$NONEXISTENT/path');
-      expect(normalizePathForFilesystem('%NONEXISTENT%/path')).toBe('%NONEXISTENT%/path');
+      expect(normalizePathForFilesystem('$NONEXISTENT/path')).toBe(path.normalize('$NONEXISTENT/path'));
+      expect(normalizePathForFilesystem('%NONEXISTENT%/path')).toBe(path.normalize('%NONEXISTENT%/path'));
     });
 
     it('handles mixed path separators', () => {

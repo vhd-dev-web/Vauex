@@ -95,6 +95,10 @@ jest.mock('@/features/settings/ui/EnvironmentSettingsSection', () => ({
 jest.mock('@/providers/codex/app/CodexWorkspaceServices', () => ({
   getCodexWorkspaceServices: jest.fn(() => ({
     commandCatalog: null,
+    cliResolver: {
+      resolveFromSettings: jest.fn(() => null),
+      reset: jest.fn(),
+    },
     subagentStorage: {},
     refreshAgentMentions: jest.fn(),
   })),

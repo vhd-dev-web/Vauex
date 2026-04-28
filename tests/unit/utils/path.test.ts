@@ -151,10 +151,10 @@ describe('parsePathEntries', () => {
 
   it('splits on platform separator', () => {
     const sep = isWindows ? ';' : ':';
-    const result = parsePathEntries(`/a${sep}/b${sep}/c`);
-    expect(result).toContain('/a');
-    expect(result).toContain('/b');
-    expect(result).toContain('/c');
+    const result = parsePathEntries(`/root/a${sep}/root/b${sep}/root/c`);
+    expect(result).toContain('/root/a');
+    expect(result).toContain('/root/b');
+    expect(result).toContain('/root/c');
   });
 
   it('filters out empty segments', () => {
@@ -237,22 +237,22 @@ describe('normalizePathForFilesystem', () => {
 
   it('normalizes a regular path', () => {
     const result = normalizePathForFilesystem('/usr/local/bin');
-    expect(result).toBe('/usr/local/bin');
+    expect(result).toBe(path.normalize('/usr/local/bin'));
   });
 
   it('normalizes path with redundant separators', () => {
     const result = normalizePathForFilesystem('/usr//local///bin');
-    expect(result).toBe('/usr/local/bin');
+    expect(result).toBe(path.normalize('/usr/local/bin'));
   });
 
   it('normalizes path with . segments', () => {
     const result = normalizePathForFilesystem('/usr/./local/./bin');
-    expect(result).toBe('/usr/local/bin');
+    expect(result).toBe(path.normalize('/usr/local/bin'));
   });
 
   it('normalizes path with .. segments', () => {
     const result = normalizePathForFilesystem('/usr/local/../bin');
-    expect(result).toBe('/usr/bin');
+    expect(result).toBe(path.normalize('/usr/bin'));
   });
 
   it('expands ~ in path', () => {
@@ -405,8 +405,11 @@ describe('normalizePathForVault', () => {
 });
 
 describe('findClaudeCLIPath', () => {
+  const originalPlatform = process.platform;
+
   afterEach(() => {
     jest.restoreAllMocks();
+    Object.defineProperty(process, 'platform', { value: originalPlatform });
   });
 
   it('returns null when nothing found', () => {
@@ -451,7 +454,8 @@ describe('findClaudeCLIPath', () => {
   });
 
   it('falls back to npm cli.js paths when binary not found', () => {
-    const cliJsPath = path.join(
+    Object.defineProperty(process, 'platform', { value: 'darwin' });
+    const cliJsPath = path.posix.join(
       os.homedir(), '.npm-global', 'lib', 'node_modules',
       '@anthropic-ai', 'claude-code', 'cli.js'
     );
@@ -468,6 +472,7 @@ describe('findClaudeCLIPath', () => {
   });
 
   it('falls back to PATH environment when common and npm paths fail', () => {
+    Object.defineProperty(process, 'platform', { value: 'darwin' });
     const envClaudePath = '/env/specific/bin/claude';
     const originalPath = process.env.PATH;
     process.env.PATH = `/env/specific/bin:${originalPath}`;

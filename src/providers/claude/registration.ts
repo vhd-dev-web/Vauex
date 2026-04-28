@@ -13,7 +13,7 @@ import { claudeChatUIConfig } from './ui/ClaudeChatUIConfig';
 export const claudeProviderRegistration: ProviderRegistration = {
   displayName: 'Claude',
   blankTabOrder: 20,
-  isEnabled: () => false,
+  isEnabled: () => true,
   capabilities: CLAUDE_PROVIDER_CAPABILITIES,
   environmentKeyPatterns: [/^ANTHROPIC_/i, /^CLAUDE_/i],
   chatUIConfig: claudeChatUIConfig,

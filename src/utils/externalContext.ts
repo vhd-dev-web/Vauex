@@ -33,10 +33,10 @@ export function findConflictingPath(
   newPath: string,
   existingPaths: string[]
 ): PathConflict | null {
-  const normalizedNew = normalizePathForComparison(newPath);
+  const normalizedNew = normalizePathForComparison(newPath).replace(/\\/g, '/');
 
   for (const existing of existingPaths) {
-    const normalizedExisting = normalizePathForComparison(existing);
+    const normalizedExisting = normalizePathForComparison(existing).replace(/\\/g, '/');
 
     if (normalizedNew.startsWith(normalizedExisting + '/')) {
       return { path: existing, type: 'parent' };

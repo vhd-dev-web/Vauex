@@ -3382,7 +3382,7 @@ describe('Tab - Cross-Provider Model Rejection', () => {
     jest.spyOn(ProviderRegistry, 'getTaskResultInterpreter').mockReturnValue({} as any);
     jest.spyOn(ProviderRegistry, 'getChatUIConfig').mockReturnValue({
       getModelOptions: jest.fn().mockReturnValue([]),
-      ownsModel: jest.fn((model: string) => model.startsWith('gpt-') || /^o\d/.test(model)),
+      ownsModel: jest.fn((model: string) => model === 'opus'),
       isAdaptiveReasoningModel: jest.fn().mockReturnValue(false),
       getReasoningOptions: jest.fn().mockReturnValue([]),
       getDefaultReasoningValue: jest.fn().mockReturnValue('off'),
