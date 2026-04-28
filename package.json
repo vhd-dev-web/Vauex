@@ -1,6 +1,6 @@
 {
   "name": "vauex",
-  "version": "2.0.8",
+  "version": "0.1.0",
   "description": "Vauex - OpenAI Codex embedded in Obsidian sidebar",
   "main": "main.js",
   "scripts": {
