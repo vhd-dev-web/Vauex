@@ -1,0 +1,10 @@
+{
+  "id": "vauex",
+  "name": "Vauex",
+  "version": "2.0.8",
+  "minAppVersion": "1.4.5",
+  "description": "Use OpenAI Codex as an AI coding agent inside your Obsidian vault.",
+  "author": "Yishen Tu",
+  "authorUrl": "https://github.com/YishenTu",
+  "isDesktopOnly": true
+}

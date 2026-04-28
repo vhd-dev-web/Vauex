@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a Vauex problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open Vauex\n2. Send a Codex message\n3. See error"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS and Obsidian version
+      placeholder: "Windows 11, Obsidian 1.x"
+  - type: textarea
+    id: codex
+    attributes:
+      label: Codex setup
+      description: Native or WSL, CLI path if configured, and any relevant error message.
