@@ -34,8 +34,8 @@ interface OpencodeAuxQueryRunnerOptions {
 }
 
 const OPENCODE_AUX_AGENT_IDS: Record<OpencodeAuxAgentProfile, string> = {
-  passive: 'claudian-aux-passive',
-  readonly: 'claudian-aux-readonly',
+  passive: 'vauex-aux-passive',
+  readonly: 'vauex-aux-readonly',
 };
 
 const OPENCODE_AUX_READ_PERMISSION = Object.freeze({
@@ -268,7 +268,7 @@ export class OpencodeAuxQueryRunner implements AuxQueryRunner {
 
     this.connection = new AcpClientConnection({
       clientInfo: {
-        name: 'claudian-aux',
+        name: 'vauex-aux',
         version: this.plugin.manifest?.version ?? '0.0.0',
       },
       delegate: {

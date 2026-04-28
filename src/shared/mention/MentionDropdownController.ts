@@ -63,11 +63,11 @@ export class MentionDropdownController {
     this.fixed = options.fixed ?? false;
 
     this.dropdown = new SelectableDropdown<MentionItem>(this.containerEl, {
-      listClassName: 'claudian-mention-dropdown',
-      itemClassName: 'claudian-mention-item',
-      emptyClassName: 'claudian-mention-empty',
+      listClassName: 'vauex-mention-dropdown',
+      itemClassName: 'vauex-mention-item',
+      emptyClassName: 'vauex-mention-empty',
       fixed: this.fixed,
-      fixedClassName: 'claudian-mention-dropdown-fixed',
+      fixedClassName: 'vauex-mention-dropdown-fixed',
     });
   }
 
@@ -433,7 +433,7 @@ export class MentionDropdownController {
         }
       },
       renderItem: (item, itemEl) => {
-        const iconEl = itemEl.createSpan({ cls: 'claudian-mention-icon' });
+        const iconEl = itemEl.createSpan({ cls: 'vauex-mention-icon' });
         switch (item.type) {
           case 'mcp-server':
             iconEl.innerHTML = MCP_ICON_SVG;
@@ -453,44 +453,44 @@ export class MentionDropdownController {
             setIcon(iconEl, 'file-text');
         }
 
-        const textEl = itemEl.createSpan({ cls: 'claudian-mention-text' });
+        const textEl = itemEl.createSpan({ cls: 'vauex-mention-text' });
 
         switch (item.type) {
           case 'mcp-server':
-            textEl.createSpan({ cls: 'claudian-mention-name' }).setText(`@${item.name}`);
+            textEl.createSpan({ cls: 'vauex-mention-name' }).setText(`@${item.name}`);
             break;
           case 'agent-folder':
             textEl.createSpan({
-              cls: 'claudian-mention-name claudian-mention-name-agent-folder',
+              cls: 'vauex-mention-name vauex-mention-name-agent-folder',
             }).setText(`@${item.name}/`);
             break;
           case 'agent': {
             // Show ID (which is namespaced for plugin agents) for consistency with inserted text
             textEl.createSpan({
-              cls: 'claudian-mention-name claudian-mention-name-agent',
+              cls: 'vauex-mention-name vauex-mention-name-agent',
             }).setText(`@${item.id}`);
             if (item.description) {
-              textEl.createSpan({ cls: 'claudian-mention-agent-desc' }).setText(item.description);
+              textEl.createSpan({ cls: 'vauex-mention-agent-desc' }).setText(item.description);
             }
             break;
           }
           case 'context-folder':
             textEl.createSpan({
-              cls: 'claudian-mention-name claudian-mention-name-folder',
+              cls: 'vauex-mention-name vauex-mention-name-folder',
             }).setText(`@${item.name}/`);
             break;
           case 'context-file':
             textEl.createSpan({
-              cls: 'claudian-mention-name claudian-mention-name-context',
+              cls: 'vauex-mention-name vauex-mention-name-context',
             }).setText(item.name);
             break;
           case 'folder':
             textEl.createSpan({
-              cls: 'claudian-mention-name claudian-mention-name-folder',
+              cls: 'vauex-mention-name vauex-mention-name-folder',
             }).setText(`@${item.path}/`);
             break;
           default:
-            textEl.createSpan({ cls: 'claudian-mention-path' }).setText(item.path || item.name);
+            textEl.createSpan({ cls: 'vauex-mention-path' }).setText(item.path || item.name);
         }
       },
       onItemClick: (item, index, e) => {

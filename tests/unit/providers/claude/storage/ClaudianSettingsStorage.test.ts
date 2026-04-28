@@ -47,7 +47,7 @@ describe('ClaudianSettingsStorage', () => {
       expect(mockAdapter.read).not.toHaveBeenCalled();
     });
 
-    it('loads legacy .claude settings and migrates them to .claudian', async () => {
+    it('loads legacy .claudian settings and copies them to .vauex without deleting the legacy file', async () => {
       mockAdapter.exists.mockImplementation(async (path: string) => (
         path === LEGACY_CLAUDIAN_SETTINGS_PATH
       ));
@@ -69,7 +69,7 @@ describe('ClaudianSettingsStorage', () => {
         CLAUDIAN_SETTINGS_PATH,
         expect.any(String),
       );
-      expect(mockAdapter.delete).toHaveBeenCalledWith(LEGACY_CLAUDIAN_SETTINGS_PATH);
+      expect(mockAdapter.delete).not.toHaveBeenCalled();
     });
 
     it('should parse valid JSON and merge with defaults', async () => {
@@ -351,7 +351,7 @@ describe('ClaudianSettingsStorage', () => {
       expect(writtenContent).not.toHaveProperty('slashCommands');
     });
 
-    it('deletes the legacy settings file after writing the new path', async () => {
+    it('leaves the legacy settings file untouched after writing the active path', async () => {
       mockAdapter.exists.mockImplementation(async (path: string) => (
         path === LEGACY_CLAUDIAN_SETTINGS_PATH
       ));
@@ -362,7 +362,7 @@ describe('ClaudianSettingsStorage', () => {
         CLAUDIAN_SETTINGS_PATH,
         expect.any(String),
       );
-      expect(mockAdapter.delete).toHaveBeenCalledWith(LEGACY_CLAUDIAN_SETTINGS_PATH);
+      expect(mockAdapter.delete).not.toHaveBeenCalled();
     });
 
     it('should throw on write error', async () => {

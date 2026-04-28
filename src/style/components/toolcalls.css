@@ -1,8 +1,8 @@
-.claudian-tool-call {
+.vauex-tool-call {
   margin: 8px 0;
 }
 
-.claudian-tool-header {
+.vauex-tool-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -11,23 +11,23 @@
   overflow: hidden;
 }
 
-.claudian-tool-header:hover {
+.vauex-tool-header:hover {
   opacity: 0.85;
 }
 
-.claudian-tool-icon {
+.vauex-tool-icon {
   display: flex;
   align-items: center;
   color: var(--text-accent);
   flex-shrink: 0;
 }
 
-.claudian-tool-icon svg {
+.vauex-tool-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.claudian-tool-name {
+.vauex-tool-name {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 400;
@@ -36,7 +36,7 @@
   flex-shrink: 0;
 }
 
-.claudian-tool-summary {
+.vauex-tool-summary {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-muted);
@@ -47,15 +47,15 @@
   min-width: 0;
 }
 
-.claudian-tool-summary:empty {
+.vauex-tool-summary:empty {
   display: none;
 }
 
-.claudian-tool-call-bash.expanded .claudian-tool-summary {
+.vauex-tool-call-bash.expanded .vauex-tool-summary {
   display: none;
 }
 
-.claudian-tool-bash-command {
+.vauex-tool-bash-command {
   font-family: var(--font-monospace);
   font-size: 12px;
   line-height: 1.4;
@@ -65,8 +65,8 @@
   padding: 2px 0 4px;
 }
 
-/* Legacy: StatusPanel bash entries still use claudian-tool-label */
-.claudian-tool-label {
+/* Legacy: StatusPanel bash entries still use vauex-tool-label */
+.vauex-tool-label {
   font-family: var(--font-monospace);
   font-size: 13px;
   font-weight: 400;
@@ -76,47 +76,47 @@
   text-overflow: ellipsis;
 }
 
-.claudian-tool-current {
+.vauex-tool-current {
   font-family: var(--font-monospace);
   font-size: 13px;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
-.claudian-tool-current:empty {
+.vauex-tool-current:empty {
   display: none;
 }
 
-.claudian-tool-status {
+.vauex-tool-status {
   display: flex;
   align-items: center;
   flex-shrink: 0;
   margin-left: auto;
 }
 
-.claudian-tool-status svg {
+.vauex-tool-status svg {
   width: 14px;
   height: 14px;
 }
 
-.claudian-tool-status.status-running {
+.vauex-tool-status.status-running {
   color: var(--text-accent);
 }
 
-.claudian-tool-status.status-completed {
+.vauex-tool-status.status-completed {
   color: var(--color-green);
 }
 
-.claudian-tool-status.status-error {
+.vauex-tool-status.status-error {
   color: var(--color-red);
 }
 
-.claudian-tool-status.status-blocked {
+.vauex-tool-status.status-blocked {
   color: var(--color-orange);
 }
 
 /* Tool call content - border style (like thinking block) */
-.claudian-tool-content {
+.vauex-tool-content {
   padding: 4px 0;
   padding-inline-start: 16px;
   margin-inline-start: 7px;
@@ -124,34 +124,34 @@
 }
 
 /* Tool content variants that render inline widgets instead of bordered results */
-.claudian-tool-content-todo,
-.claudian-tool-content-ask {
+.vauex-tool-content-todo,
+.vauex-tool-content-ask {
   border-inline-start: none;
   margin-inline-start: 0;
   padding-inline-start: 0;
 }
 
 /* Expanded content: per-line rendering */
-.claudian-tool-lines {
+.vauex-tool-lines {
   font-family: var(--font-monospace);
   font-size: 12px;
   line-height: 1.4;
   overflow-x: auto;
 }
 
-.claudian-tool-line {
+.vauex-tool-line {
   padding: 1px 0;
   color: var(--text-muted);
   white-space: pre;
 }
 
 /* Hover highlight for file search results */
-.claudian-tool-line.hoverable:hover {
+.vauex-tool-line.hoverable:hover {
   background: var(--background-modifier-hover);
 }
 
 /* Truncation indicator: "... N more lines" */
-.claudian-tool-truncated {
+.vauex-tool-truncated {
   color: var(--text-faint);
   font-style: italic;
   padding: 4px 0;
@@ -160,7 +160,7 @@
 }
 
 /* ToolSearch expanded: icon + tool name rows */
-.claudian-tool-search-item {
+.vauex-tool-search-item {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -170,7 +170,7 @@
   color: var(--text-muted);
 }
 
-.claudian-tool-search-icon {
+.vauex-tool-search-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -179,13 +179,13 @@
   color: var(--text-faint);
 }
 
-.claudian-tool-search-icon svg {
+.vauex-tool-search-icon svg {
   width: 14px;
   height: 14px;
 }
 
 /* Web search links */
-.claudian-tool-link {
+.vauex-tool-link {
   display: flex;
   align-items: flex-start;
   gap: 6px;
@@ -198,11 +198,11 @@
   line-height: 1.4;
 }
 
-.claudian-tool-link:hover {
+.vauex-tool-link:hover {
   color: var(--text-accent);
 }
 
-.claudian-tool-link-icon {
+.vauex-tool-link-icon {
   flex-shrink: 0;
   width: 12px;
   height: 12px;
@@ -210,19 +210,19 @@
   color: var(--text-faint);
 }
 
-.claudian-tool-link-icon svg {
+.vauex-tool-link-icon svg {
   width: 12px;
   height: 12px;
 }
 
-.claudian-tool-link-title {
+.vauex-tool-link-title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 /* Web search summary section */
-.claudian-tool-web-summary {
+.vauex-tool-web-summary {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
@@ -236,7 +236,7 @@
 }
 
 /* Empty state for file search */
-.claudian-tool-empty {
+.vauex-tool-empty {
   color: var(--text-faint);
   font-style: italic;
   font-family: var(--font-monospace);
@@ -244,12 +244,12 @@
   padding: 4px 0;
 }
 
-.claudian-tool-result-row {
+.vauex-tool-result-row {
   display: flex;
   align-items: flex-start;
 }
 
-.claudian-tool-result-text {
+.vauex-tool-result-text {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
@@ -259,22 +259,22 @@
   flex: 1;
 }
 
-.claudian-tool-result-item {
+.vauex-tool-result-item {
   display: block;
   margin-bottom: 2px;
 }
 
-.claudian-tool-patch-section + .claudian-tool-patch-section {
+.vauex-tool-patch-section + .vauex-tool-patch-section {
   margin-top: 10px;
 }
 
-.claudian-tool-patch-header {
+.vauex-tool-patch-header {
   font-family: var(--font-monospace);
   font-size: 12px;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
 
-.claudian-tool-result-item:last-child {
+.vauex-tool-result-item:last-child {
   margin-bottom: 0;
 }

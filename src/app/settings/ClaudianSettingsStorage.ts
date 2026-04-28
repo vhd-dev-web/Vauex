@@ -1,6 +1,7 @@
 import {
   CLAUDIAN_SETTINGS_PATH,
   LEGACY_CLAUDIAN_SETTINGS_PATH,
+  LEGACY_CLAUDIAN_SETTINGS_PATHS,
 } from '../../core/bootstrap/StoragePaths';
 import {
   normalizeHiddenCommandList,
@@ -255,7 +256,6 @@ export class ClaudianSettingsStorage {
       2,
     );
     await this.adapter.write(CLAUDIAN_SETTINGS_PATH, content);
-    await this.deleteLegacyFileIfPresent();
   }
 
   async exists(): Promise<boolean> {
@@ -263,7 +263,13 @@ export class ClaudianSettingsStorage {
       return true;
     }
 
-    return this.adapter.exists(LEGACY_CLAUDIAN_SETTINGS_PATH);
+    for (const legacyPath of LEGACY_CLAUDIAN_SETTINGS_PATHS) {
+      if (await this.adapter.exists(legacyPath)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   async update(updates: Partial<StoredClaudianSettings>): Promise<void> {
@@ -303,16 +309,12 @@ export class ClaudianSettingsStorage {
       return CLAUDIAN_SETTINGS_PATH;
     }
 
-    if (await this.adapter.exists(LEGACY_CLAUDIAN_SETTINGS_PATH)) {
-      return LEGACY_CLAUDIAN_SETTINGS_PATH;
+    for (const legacyPath of LEGACY_CLAUDIAN_SETTINGS_PATHS) {
+      if (await this.adapter.exists(legacyPath)) {
+        return legacyPath;
+      }
     }
 
     return null;
-  }
-
-  private async deleteLegacyFileIfPresent(): Promise<void> {
-    if (await this.adapter.exists(LEGACY_CLAUDIAN_SETTINGS_PATH)) {
-      await this.adapter.delete(LEGACY_CLAUDIAN_SETTINGS_PATH);
-    }
   }
 }

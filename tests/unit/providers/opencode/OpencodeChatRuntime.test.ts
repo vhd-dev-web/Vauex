@@ -376,7 +376,7 @@ describe('OpencodeChatRuntime', () => {
             availableModes: [
               { id: OPENCODE_BUILD_MODE_ID, name: 'build' },
               { id: 'compaction', name: 'compaction' },
-              { id: OPENCODE_SAFE_MODE_ID, name: 'claudian-safe' },
+              { id: OPENCODE_SAFE_MODE_ID, name: 'vauex-safe' },
               { id: 'plan', name: 'plan' },
             ],
             selectedMode: '',

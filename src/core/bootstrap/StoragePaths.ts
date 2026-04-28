@@ -1,7 +1,23 @@
-export const CLAUDIAN_STORAGE_PATH = '.claudian';
+export const VAUEX_STORAGE_PATH = '.vauex';
+export const VAUEX_SETTINGS_PATH = `${VAUEX_STORAGE_PATH}/vauex-settings.json`;
+export const VAUEX_SESSIONS_PATH = `${VAUEX_STORAGE_PATH}/sessions`;
 
-export const LEGACY_CLAUDIAN_SETTINGS_PATH = '.claude/claudian-settings.json';
-export const CLAUDIAN_SETTINGS_PATH = `${CLAUDIAN_STORAGE_PATH}/claudian-settings.json`;
+export const LEGACY_CLAUDIAN_STORAGE_PATH = '.claudian';
+export const LEGACY_CLAUDIAN_SETTINGS_PATH = `${LEGACY_CLAUDIAN_STORAGE_PATH}/claudian-settings.json`;
+export const LEGACY_CLAUDE_SETTINGS_PATH = '.claude/claudian-settings.json';
+export const LEGACY_CLAUDIAN_SETTINGS_PATHS = [
+  LEGACY_CLAUDIAN_SETTINGS_PATH,
+  LEGACY_CLAUDE_SETTINGS_PATH,
+] as const;
 
-export const LEGACY_SESSIONS_PATH = '.claude/sessions';
-export const SESSIONS_PATH = `${CLAUDIAN_STORAGE_PATH}/sessions`;
+export const LEGACY_CLAUDIAN_SESSIONS_PATH = `${LEGACY_CLAUDIAN_STORAGE_PATH}/sessions`;
+export const LEGACY_CLAUDE_SESSIONS_PATH = '.claude/sessions';
+export const LEGACY_SESSIONS_PATH = LEGACY_CLAUDIAN_SESSIONS_PATH;
+export const LEGACY_SESSION_PATHS = [
+  LEGACY_CLAUDIAN_SESSIONS_PATH,
+  LEGACY_CLAUDE_SESSIONS_PATH,
+] as const;
+
+export const CLAUDIAN_STORAGE_PATH = VAUEX_STORAGE_PATH;
+export const CLAUDIAN_SETTINGS_PATH = VAUEX_SETTINGS_PATH;
+export const SESSIONS_PATH = VAUEX_SESSIONS_PATH;

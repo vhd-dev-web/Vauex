@@ -6,7 +6,7 @@ import type {
   ConversationMeta,
   SessionMetadata,
 } from '../types';
-import { LEGACY_SESSIONS_PATH, SESSIONS_PATH } from './StoragePaths';
+import { LEGACY_SESSION_PATHS, LEGACY_SESSIONS_PATH, SESSIONS_PATH } from './StoragePaths';
 
 export {
   LEGACY_SESSIONS_PATH,
@@ -24,11 +24,14 @@ export class SessionStorage {
     return `${LEGACY_SESSIONS_PATH}/${id}.meta.json`;
   }
 
+  getLegacyMetadataPaths(id: string): string[] {
+    return LEGACY_SESSION_PATHS.map((sessionPath) => `${sessionPath}/${id}.meta.json`);
+  }
+
   async saveMetadata(metadata: SessionMetadata): Promise<void> {
     const filePath = this.getMetadataPath(metadata.id);
     const content = JSON.stringify(metadata, null, 2);
     await this.adapter.write(filePath, content);
-    await this.deleteLegacyMetadataIfPresent(metadata.id);
   }
 
   async loadMetadata(id: string): Promise<SessionMetadata | null> {
@@ -54,7 +57,6 @@ export class SessionStorage {
 
   async deleteMetadata(id: string): Promise<void> {
     await this.adapter.delete(this.getMetadataPath(id));
-    await this.deleteLegacyMetadataIfPresent(id);
   }
 
   async listMetadata(): Promise<SessionMetadata[]> {
@@ -68,7 +70,7 @@ export class SessionStorage {
         const raw = JSON.parse(content) as SessionMetadata;
         metas.push(raw);
 
-        if (filePath.startsWith(`${LEGACY_SESSIONS_PATH}/`)) {
+        if (filePath !== this.getMetadataPath(raw.id)) {
           await this.saveMetadata(raw);
         }
       } catch {
@@ -129,34 +131,30 @@ export class SessionStorage {
       return filePath;
     }
 
-    const legacyFilePath = this.getLegacyMetadataPath(id);
-    if (await this.adapter.exists(legacyFilePath)) {
-      return legacyFilePath;
+    for (const legacyFilePath of this.getLegacyMetadataPaths(id)) {
+      if (await this.adapter.exists(legacyFilePath)) {
+        return legacyFilePath;
+      }
     }
 
     return null;
   }
 
-  private async deleteLegacyMetadataIfPresent(id: string): Promise<void> {
-    const legacyFilePath = this.getLegacyMetadataPath(id);
-    if (await this.adapter.exists(legacyFilePath)) {
-      await this.adapter.delete(legacyFilePath);
-    }
-  }
-
   private async listUniqueMetadataFiles(): Promise<string[]> {
     const preferredFiles = await this.listMetadataFiles(SESSIONS_PATH);
-    const fallbackFiles = await this.listMetadataFiles(LEGACY_SESSIONS_PATH);
     const filesByName = new Map<string, string>();
 
     for (const filePath of preferredFiles) {
       filesByName.set(this.getFileName(filePath), filePath);
     }
 
-    for (const filePath of fallbackFiles) {
-      const fileName = this.getFileName(filePath);
-      if (!filesByName.has(fileName)) {
-        filesByName.set(fileName, filePath);
+    for (const legacyPath of LEGACY_SESSION_PATHS) {
+      const fallbackFiles = await this.listMetadataFiles(legacyPath);
+      for (const filePath of fallbackFiles) {
+        const fileName = this.getFileName(filePath);
+        if (!filesByName.has(fileName)) {
+          filesByName.set(fileName, filePath);
+        }
       }
     }
 

@@ -55,7 +55,7 @@ A single session file may contain both legacy (`type: 'event'`) and modern (`typ
 
 ### Image Lifecycle
 
-Images are written to a temp directory (`os.tmpdir()/claudian-codex-images-{random}/`), passed as `{ type: 'localImage', path }` inputs, and cleaned up in the `query()` `finally` block.
+Images are written to a temp directory (`os.tmpdir()/vauex-codex-images-{random}/`), passed as `{ type: 'localImage', path }` inputs, and cleaned up in the `query()` `finally` block.
 
 ### `serverRequest/resolved`
 

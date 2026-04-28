@@ -27,18 +27,18 @@ export class InlinePlanApproval {
   }
 
   render(): void {
-    this.rootEl = this.containerEl.createDiv({ cls: 'claudian-plan-approval-inline' });
+    this.rootEl = this.containerEl.createDiv({ cls: 'vauex-plan-approval-inline' });
 
-    this.rootEl.createDiv({ cls: 'claudian-plan-inline-title', text: 'Plan complete' });
+    this.rootEl.createDiv({ cls: 'vauex-plan-inline-title', text: 'Plan complete' });
 
-    const actionsEl = this.rootEl.createDiv({ cls: 'claudian-ask-list' });
+    const actionsEl = this.rootEl.createDiv({ cls: 'vauex-ask-list' });
 
     // 1. Implement
-    const implementRow = actionsEl.createDiv({ cls: 'claudian-ask-item' });
+    const implementRow = actionsEl.createDiv({ cls: 'vauex-ask-item' });
     implementRow.addClass('is-focused');
-    implementRow.createSpan({ text: '\u203A', cls: 'claudian-ask-cursor' });
-    implementRow.createSpan({ text: '1. ', cls: 'claudian-ask-item-num' });
-    implementRow.createSpan({ text: 'Implement', cls: 'claudian-ask-item-label' });
+    implementRow.createSpan({ text: '\u203A', cls: 'vauex-ask-cursor' });
+    implementRow.createSpan({ text: '1. ', cls: 'vauex-ask-item-num' });
+    implementRow.createSpan({ text: 'Implement', cls: 'vauex-ask-item-label' });
     implementRow.addEventListener('click', () => {
       this.focusedIndex = 0;
       this.updateFocus();
@@ -47,12 +47,12 @@ export class InlinePlanApproval {
     this.items.push(implementRow);
 
     // 2. Revise (with feedback input)
-    const reviseRow = actionsEl.createDiv({ cls: 'claudian-ask-item claudian-ask-custom-item' });
-    reviseRow.createSpan({ text: '\u00A0', cls: 'claudian-ask-cursor' });
-    reviseRow.createSpan({ text: '2. ', cls: 'claudian-ask-item-num' });
+    const reviseRow = actionsEl.createDiv({ cls: 'vauex-ask-item vauex-ask-custom-item' });
+    reviseRow.createSpan({ text: '\u00A0', cls: 'vauex-ask-cursor' });
+    reviseRow.createSpan({ text: '2. ', cls: 'vauex-ask-item-num' });
     this.feedbackInput = reviseRow.createEl('input', {
       type: 'text',
-      cls: 'claudian-ask-custom-text',
+      cls: 'vauex-ask-custom-text',
       placeholder: 'Enter feedback to revise plan...',
     });
     this.feedbackInput.addEventListener('focus', () => { this.isInputFocused = true; });
@@ -64,10 +64,10 @@ export class InlinePlanApproval {
     this.items.push(reviseRow);
 
     // 3. Cancel
-    const cancelRow = actionsEl.createDiv({ cls: 'claudian-ask-item' });
-    cancelRow.createSpan({ text: '\u00A0', cls: 'claudian-ask-cursor' });
-    cancelRow.createSpan({ text: '3. ', cls: 'claudian-ask-item-num' });
-    cancelRow.createSpan({ text: 'Cancel', cls: 'claudian-ask-item-label' });
+    const cancelRow = actionsEl.createDiv({ cls: 'vauex-ask-item' });
+    cancelRow.createSpan({ text: '\u00A0', cls: 'vauex-ask-cursor' });
+    cancelRow.createSpan({ text: '3. ', cls: 'vauex-ask-item-num' });
+    cancelRow.createSpan({ text: 'Cancel', cls: 'vauex-ask-item-label' });
     cancelRow.addEventListener('click', () => {
       this.focusedIndex = 2;
       this.updateFocus();
@@ -75,7 +75,7 @@ export class InlinePlanApproval {
     });
     this.items.push(cancelRow);
 
-    this.rootEl.createDiv({ text: HINTS_TEXT, cls: 'claudian-ask-hints' });
+    this.rootEl.createDiv({ text: HINTS_TEXT, cls: 'vauex-ask-hints' });
 
     this.rootEl.setAttribute('tabindex', '0');
     this.rootEl.addEventListener('keydown', this.boundKeyDown);
@@ -144,14 +144,14 @@ export class InlinePlanApproval {
   private updateFocus(): void {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
-      const cursor = item.querySelector('.claudian-ask-cursor');
+      const cursor = item.querySelector('.vauex-ask-cursor');
       if (i === this.focusedIndex) {
         item.addClass('is-focused');
         if (cursor) cursor.textContent = '\u203A';
         item.scrollIntoView({ block: 'nearest' });
 
-        if (item.hasClass('claudian-ask-custom-item')) {
-          const input = item.querySelector('.claudian-ask-custom-text') as HTMLInputElement;
+        if (item.hasClass('vauex-ask-custom-item')) {
+          const input = item.querySelector('.vauex-ask-custom-text') as HTMLInputElement;
           if (input) {
             input.focus();
             this.isInputFocused = true;
@@ -161,8 +161,8 @@ export class InlinePlanApproval {
         item.removeClass('is-focused');
         if (cursor) cursor.textContent = '\u00A0';
 
-        if (item.hasClass('claudian-ask-custom-item') && this.isInputFocused) {
-          const input = item.querySelector('.claudian-ask-custom-text') as HTMLInputElement;
+        if (item.hasClass('vauex-ask-custom-item') && this.isInputFocused) {
+          const input = item.querySelector('.vauex-ask-custom-text') as HTMLInputElement;
           if (input) {
             input.blur();
             this.isInputFocused = false;

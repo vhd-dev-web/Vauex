@@ -58,7 +58,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
       .setName(`CLI Path (${hostnameKey})`)
       .setDesc('Optional absolute path to the OpenCode CLI for this computer. Leave empty to use `opencode` from PATH.');
 
-    const validationEl = container.createDiv({ cls: 'claudian-cli-path-validation' });
+    const validationEl = container.createDiv({ cls: 'vauex-cli-path-validation' });
     validationEl.style.color = 'var(--text-error)';
     validationEl.style.fontSize = '0.85em';
     validationEl.style.marginTop = '-0.5em';
@@ -152,7 +152,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
           await persistCliPath(value);
         });
 
-      text.inputEl.addClass('claudian-settings-cli-path-input');
+      text.inputEl.addClass('vauex-settings-cli-path-input');
       text.inputEl.style.width = '100%';
       cliPathInputEl = text.inputEl;
 
@@ -165,34 +165,34 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
       .setName('Visible Models')
       .setDesc('Choose which OpenCode models appear in the chat selector. Filter by provider or type to search. The current session model stays pinned even if it is not selected here.');
 
-    const pickerEl = container.createDiv({ cls: 'claudian-opencode-model-picker' });
+    const pickerEl = container.createDiv({ cls: 'vauex-opencode-model-picker' });
 
     let searchQuery = '';
     let providerFilter = ALL_PROVIDERS_KEY;
 
-    const summaryEl = pickerEl.createDiv({ cls: 'claudian-opencode-model-picker-summary' });
-    const selectedEl = pickerEl.createDiv({ cls: 'claudian-opencode-model-picker-selected' });
-    const catalogEl = pickerEl.createEl('details', { cls: 'claudian-opencode-model-picker-catalog' });
+    const summaryEl = pickerEl.createDiv({ cls: 'vauex-opencode-model-picker-summary' });
+    const selectedEl = pickerEl.createDiv({ cls: 'vauex-opencode-model-picker-selected' });
+    const catalogEl = pickerEl.createEl('details', { cls: 'vauex-opencode-model-picker-catalog' });
     catalogEl.open = getOpencodeProviderSettings(settingsBag).visibleModels.length === 0;
     const catalogSummaryEl = catalogEl.createEl('summary', {
-      cls: 'claudian-opencode-model-picker-catalog-summary',
+      cls: 'vauex-opencode-model-picker-catalog-summary',
     });
     catalogSummaryEl.createSpan({
-      cls: 'claudian-opencode-model-picker-catalog-caret',
+      cls: 'vauex-opencode-model-picker-catalog-caret',
       text: '▸',
     });
     catalogSummaryEl.createSpan({
-      cls: 'claudian-opencode-model-picker-catalog-title',
+      cls: 'vauex-opencode-model-picker-catalog-title',
       text: 'Browse models',
     });
     const catalogSummaryCountEl = catalogSummaryEl.createSpan({
-      cls: 'claudian-opencode-model-picker-catalog-count',
+      cls: 'vauex-opencode-model-picker-catalog-count',
     });
 
-    const controlsEl = catalogEl.createDiv({ cls: 'claudian-opencode-model-picker-controls' });
+    const controlsEl = catalogEl.createDiv({ cls: 'vauex-opencode-model-picker-controls' });
 
     const searchInput = controlsEl.createEl('input', {
-      cls: 'claudian-opencode-model-picker-search',
+      cls: 'vauex-opencode-model-picker-search',
       type: 'search',
     });
     searchInput.placeholder = 'Filter by model, provider, or id…';
@@ -202,14 +202,14 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
     });
 
     const providerSelectEl = controlsEl.createEl('select', {
-      cls: 'claudian-opencode-model-picker-provider',
+      cls: 'vauex-opencode-model-picker-provider',
     });
     providerSelectEl.addEventListener('change', () => {
       providerFilter = providerSelectEl.value;
       renderList();
     });
 
-    const listEl = catalogEl.createDiv({ cls: 'claudian-opencode-model-picker-list' });
+    const listEl = catalogEl.createDiv({ cls: 'vauex-opencode-model-picker-list' });
 
     const getEnrichedModels = (): EnrichedModel[] => {
       const current = getOpencodeProviderSettings(settingsBag);
@@ -267,7 +267,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
 
       summaryEl.createSpan({ text: 'Visible: ' });
       summaryEl.createSpan({
-        cls: 'claudian-opencode-model-picker-summary-value',
+        cls: 'vauex-opencode-model-picker-summary-value',
         text: String(current.visibleModels.length),
       });
       summaryEl.createSpan({
@@ -294,13 +294,13 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
         getEnrichedModels().map((model) => [model.rawId, model] as const),
       );
 
-      const headerEl = selectedEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-header' });
+      const headerEl = selectedEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-header' });
       headerEl.createEl('span', {
-        cls: 'claudian-opencode-model-picker-selected-label',
+        cls: 'vauex-opencode-model-picker-selected-label',
         text: `Selected (${current.visibleModels.length})`,
       });
       const clearAllBtn = headerEl.createEl('button', {
-        cls: 'claudian-opencode-model-picker-selected-clear',
+        cls: 'vauex-opencode-model-picker-selected-clear',
         text: 'Clear all',
       });
       clearAllBtn.setAttribute('aria-label', 'Clear all selected models');
@@ -308,7 +308,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
         void persistVisibleModels([]);
       });
 
-      const rowsEl = selectedEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-rows' });
+      const rowsEl = selectedEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-rows' });
 
       for (const rawId of current.visibleModels) {
         const enriched = enrichedByRawId.get(rawId);
@@ -316,44 +316,44 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
           ? `${enriched.providerLabel}/${enriched.modelLabel}`
           : rawId;
 
-        const rowEl = rowsEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-row' });
+        const rowEl = rowsEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-row' });
         if (enriched && !enriched.isAvailable) {
-          rowEl.classList.add('claudian-opencode-model-picker-selected-row--unavailable');
+          rowEl.classList.add('vauex-opencode-model-picker-selected-row--unavailable');
         }
 
-        const infoEl = rowEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-info' });
-        const titleEl = infoEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-title' });
+        const infoEl = rowEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-info' });
+        const titleEl = infoEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-title' });
         if (enriched) {
           titleEl.createEl('span', {
-            cls: 'claudian-opencode-model-picker-selected-badge',
+            cls: 'vauex-opencode-model-picker-selected-badge',
             text: enriched.providerLabel,
           });
           titleEl.createEl('span', {
-            cls: 'claudian-opencode-model-picker-selected-name',
+            cls: 'vauex-opencode-model-picker-selected-name',
             text: enriched.modelLabel,
           });
         } else {
           titleEl.createEl('span', {
-            cls: 'claudian-opencode-model-picker-selected-name',
+            cls: 'vauex-opencode-model-picker-selected-name',
             text: rawId,
           });
         }
 
         if (enriched && !enriched.isAvailable) {
           infoEl.createEl('div', {
-            cls: 'claudian-opencode-model-picker-selected-unavailable',
+            cls: 'vauex-opencode-model-picker-selected-unavailable',
             text: 'Not currently reported by OpenCode',
           });
         }
 
         infoEl.createEl('div', {
-          cls: 'claudian-opencode-model-picker-selected-id',
+          cls: 'vauex-opencode-model-picker-selected-id',
           text: rawId,
         });
 
-        const controlsEl = rowEl.createDiv({ cls: 'claudian-opencode-model-picker-selected-controls' });
+        const controlsEl = rowEl.createDiv({ cls: 'vauex-opencode-model-picker-selected-controls' });
         const aliasInput = controlsEl.createEl('input', {
-          cls: 'claudian-opencode-model-picker-selected-alias',
+          cls: 'vauex-opencode-model-picker-selected-alias',
           type: 'text',
         });
         aliasInput.placeholder = defaultLabel;
@@ -392,7 +392,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
         });
 
         const removeBtn = controlsEl.createEl('button', {
-          cls: 'claudian-opencode-model-picker-selected-remove',
+          cls: 'vauex-opencode-model-picker-selected-remove',
           text: '×',
         });
         removeBtn.setAttribute('aria-label', `Remove ${defaultLabel}`);
@@ -443,7 +443,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
       const filtered = filterModels(enriched);
 
       if (filtered.length === 0) {
-        const emptyEl = listEl.createDiv({ cls: 'claudian-opencode-model-picker-empty' });
+        const emptyEl = listEl.createDiv({ cls: 'vauex-opencode-model-picker-empty' });
         emptyEl.setText(enriched.length === 0
           ? 'Start OpenCode once to load its model catalog. Vauex will then let you pick visible models.'
           : 'No models match your filter.');
@@ -451,10 +451,10 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
       }
 
       for (const model of filtered) {
-        const rowEl = listEl.createEl('label', { cls: 'claudian-opencode-model-picker-row' });
+        const rowEl = listEl.createEl('label', { cls: 'vauex-opencode-model-picker-row' });
         const isSelected = selectedIds.has(model.rawId);
         if (isSelected) {
-          rowEl.classList.add('claudian-opencode-model-picker-row--selected');
+          rowEl.classList.add('vauex-opencode-model-picker-row--selected');
         }
         rowEl.title = model.rawId;
 
@@ -468,31 +468,31 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
           void persistVisibleModels(next);
         });
 
-        const textEl = rowEl.createDiv({ cls: 'claudian-opencode-model-picker-row-text' });
+        const textEl = rowEl.createDiv({ cls: 'vauex-opencode-model-picker-row-text' });
 
-        const headerEl = textEl.createDiv({ cls: 'claudian-opencode-model-picker-row-header' });
+        const headerEl = textEl.createDiv({ cls: 'vauex-opencode-model-picker-row-header' });
         headerEl.createEl('span', {
-          cls: 'claudian-opencode-model-picker-row-name',
+          cls: 'vauex-opencode-model-picker-row-name',
           text: model.modelLabel,
         });
         const badgeEl = headerEl.createEl('span', {
-          cls: 'claudian-opencode-model-picker-row-badge',
+          cls: 'vauex-opencode-model-picker-row-badge',
           text: model.providerLabel,
         });
         if (!model.isAvailable) {
-          badgeEl.classList.add('claudian-opencode-model-picker-row-badge--unavailable');
+          badgeEl.classList.add('vauex-opencode-model-picker-row-badge--unavailable');
           badgeEl.setText('Unavailable');
           badgeEl.title = 'Configured model not currently reported by OpenCode';
         }
 
         textEl.createDiv({
-          cls: 'claudian-opencode-model-picker-row-meta',
+          cls: 'vauex-opencode-model-picker-row-meta',
           text: model.rawId,
         });
 
         if (model.description) {
           textEl.createDiv({
-            cls: 'claudian-opencode-model-picker-row-desc',
+            cls: 'vauex-opencode-model-picker-row-desc',
             text: model.description,
           });
         }
@@ -511,7 +511,7 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
 
     new Setting(container).setName('Commands and Skills').setHeading();
 
-    const commandsDesc = container.createDiv({ cls: 'claudian-sp-settings-desc' });
+    const commandsDesc = container.createDiv({ cls: 'vauex-sp-settings-desc' });
     commandsDesc.createEl('p', {
       cls: 'setting-item-description',
       text: 'OpenCode can auto-detect vault-level commands and skills from .codex/skills/ and .agents/skills/. Manage Codex entries in the Codex settings tab. This setting only hides entries from the OpenCode dropdown.',
@@ -526,13 +526,13 @@ export const opencodeSettingsTabRenderer: ProviderSettingsTabRenderer = {
     if (opencodeWorkspace?.agentStorage) {
       new Setting(container).setName('Subagents').setHeading();
 
-      const subagentsDesc = container.createDiv({ cls: 'claudian-sp-settings-desc' });
+      const subagentsDesc = container.createDiv({ cls: 'vauex-sp-settings-desc' });
       subagentsDesc.createEl('p', {
         cls: 'setting-item-description',
         text: 'Manage vault-level OpenCode subagents from .opencode/agent/ and legacy .opencode/agents/. New entries are saved as subagent-only files and appear in the @mention menu.',
       });
 
-      const subagentsContainer = container.createDiv({ cls: 'claudian-slash-commands-container' });
+      const subagentsContainer = container.createDiv({ cls: 'vauex-slash-commands-container' });
       new OpencodeAgentSettings(
         subagentsContainer,
         opencodeWorkspace.agentStorage,

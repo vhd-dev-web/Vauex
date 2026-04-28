@@ -183,7 +183,7 @@ describe('StorageService convenience methods', () => {
 
       await storage.updateClaudianSettings({ userName: 'NewUser' });
 
-      const saved = JSON.parse(files.get('.claudian/claudian-settings.json')!) as Record<string, unknown>;
+      const saved = JSON.parse(files.get('.vauex/vauex-settings.json')!) as Record<string, unknown>;
       expect(saved.userName).toBe('NewUser');
     });
   });
@@ -202,7 +202,7 @@ describe('StorageService convenience methods', () => {
       existing.userName = 'FullSave';
       await storage.saveClaudianSettings(existing);
 
-      const saved = JSON.parse(files.get('.claudian/claudian-settings.json')!) as Record<string, unknown>;
+      const saved = JSON.parse(files.get('.vauex/vauex-settings.json')!) as Record<string, unknown>;
       expect(saved.userName).toBe('FullSave');
     });
   });
@@ -222,7 +222,7 @@ describe('StorageService convenience methods', () => {
       expect(settings.model).toBe('haiku');
     });
 
-    it('migrates legacy settings into .claudian during initialization', async () => {
+    it('copies legacy settings into .vauex during initialization without deleting legacy settings', async () => {
       const { plugin, files } = createMockPlugin({
         initialFiles: {
           '.claude/claudian-settings.json': claudianSettingsJson,
@@ -232,8 +232,8 @@ describe('StorageService convenience methods', () => {
 
       await storage.initialize();
 
-      expect(files.get('.claudian/claudian-settings.json')).toBeDefined();
-      expect(files.has('.claude/claudian-settings.json')).toBe(false);
+      expect(files.get('.vauex/vauex-settings.json')).toBeDefined();
+      expect(files.has('.claude/claudian-settings.json')).toBe(true);
     });
   });
 

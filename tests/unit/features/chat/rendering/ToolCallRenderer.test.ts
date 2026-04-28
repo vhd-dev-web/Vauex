@@ -108,7 +108,7 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const answerEls = toolEl.querySelectorAll('.claudian-ask-review-a-text');
+      const answerEls = toolEl.querySelectorAll('.vauex-ask-review-a-text');
 
       expect(answerEls).toHaveLength(1);
       expect(answerEls[0].textContent).toBe('Blue');
@@ -124,7 +124,7 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const answerEls = toolEl.querySelectorAll('.claudian-ask-review-a-text');
+      const answerEls = toolEl.querySelectorAll('.vauex-ask-review-a-text');
 
       expect(answerEls).toHaveLength(1);
       expect(answerEls[0].textContent).toBe('Blue');
@@ -148,9 +148,9 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const labelEls = toolEl.querySelectorAll('.claudian-ask-item-label');
-      const descEls = toolEl.querySelectorAll('.claudian-ask-item-desc');
-      const checkEls = toolEl.querySelectorAll('.claudian-ask-check');
+      const labelEls = toolEl.querySelectorAll('.vauex-ask-item-label');
+      const descEls = toolEl.querySelectorAll('.vauex-ask-item-desc');
+      const checkEls = toolEl.querySelectorAll('.vauex-ask-check');
 
       expect(Array.from(labelEls, el => el.textContent)).toEqual(['Non-blocking', 'Blocking']);
       expect(Array.from(descEls, el => el.textContent)).toEqual(['Generate title later.', 'Wait for title first.']);
@@ -171,7 +171,7 @@ describe('ToolCallRenderer', () => {
       toolCall.result = 'Success';
       updateToolCallResult('tool-1', toolCall, toolCallElements);
 
-      const statusEl = toolEl.querySelector('.claudian-tool-status');
+      const statusEl = toolEl.querySelector('.vauex-tool-status');
       expect(statusEl?.hasClass('status-completed')).toBe(true);
     });
 
@@ -190,7 +190,7 @@ describe('ToolCallRenderer', () => {
 
       updateToolCallResult('ask-1', toolCall, toolCallElements);
 
-      const promptEl = toolEl.querySelector('.claudian-ask-review-prompt');
+      const promptEl = toolEl.querySelector('.vauex-ask-review-prompt');
       expect(promptEl?.textContent).toBe('Answer submitted successfully.');
     });
   });
@@ -525,7 +525,7 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const lines = Array.from(toolEl.querySelectorAll('.claudian-tool-line')).map(line => line.textContent);
+      const lines = Array.from(toolEl.querySelectorAll('.vauex-tool-line')).map(line => line.textContent);
 
       expect(lines).toContain('Query: obsidian plugin API');
       expect(lines).toContain('Alt query: obsidian docs');
@@ -545,13 +545,13 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const links = toolEl.querySelectorAll('.claudian-tool-link');
-      const lines = Array.from(toolEl.querySelectorAll('.claudian-tool-line')).map(line => line.textContent);
+      const links = toolEl.querySelectorAll('.vauex-tool-link');
+      const lines = Array.from(toolEl.querySelectorAll('.vauex-tool-line')).map(line => line.textContent);
 
       expect(lines).toContain('Open page');
       expect(links).toHaveLength(1);
       expect(links[0].getAttribute('href')).toBe('https://example.com/docs');
-      expect(links[0].querySelector('.claudian-tool-link-title')?.textContent).toBe('https://example.com/docs');
+      expect(links[0].querySelector('.vauex-tool-link-title')?.textContent).toBe('https://example.com/docs');
     });
   });
 
@@ -575,8 +575,8 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const headers = Array.from(toolEl.querySelectorAll('.claudian-tool-patch-header')).map(el => el.textContent);
-      const diffTexts = Array.from(toolEl.querySelectorAll('.claudian-diff-text')).map(el => el.textContent);
+      const headers = Array.from(toolEl.querySelectorAll('.vauex-tool-patch-header')).map(el => el.textContent);
+      const diffTexts = Array.from(toolEl.querySelectorAll('.vauex-diff-text')).map(el => el.textContent);
 
       expect(headers).toContain('update: src/main.ts (+1 -1)');
       expect(diffTexts).toContain("import { Plugin } from 'obsidian';");
@@ -595,7 +595,7 @@ describe('ToolCallRenderer', () => {
       });
 
       const toolEl = renderStoredToolCall(parentEl, toolCall);
-      const lines = Array.from(toolEl.querySelectorAll('.claudian-tool-line')).map(el => el.textContent);
+      const lines = Array.from(toolEl.querySelectorAll('.vauex-tool-line')).map(el => el.textContent);
 
       expect(lines).toContain('update: src/main.ts');
     });
@@ -638,8 +638,8 @@ describe('ToolCallRenderer', () => {
         ],
       };
       renderTodoWriteResult(container as unknown as HTMLElement, input);
-      expect(container.hasClass('claudian-todo-panel-content')).toBe(true);
-      expect(container.hasClass('claudian-todo-list-container')).toBe(true);
+      expect(container.hasClass('vauex-todo-panel-content')).toBe(true);
+      expect(container.hasClass('vauex-todo-list-container')).toBe(true);
     });
 
     it('should show fallback text when no todos array', () => {
@@ -679,7 +679,7 @@ describe('ToolCallRenderer', () => {
       };
       updateToolCallResult('todo-1', toolCall, toolCallElements);
 
-      const statusEl = parentEl.querySelector('.claudian-tool-status');
+      const statusEl = parentEl.querySelector('.vauex-tool-status');
       expect(statusEl?.hasClass('status-completed')).toBe(true);
     });
 

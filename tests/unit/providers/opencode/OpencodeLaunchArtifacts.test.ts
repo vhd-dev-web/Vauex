@@ -13,11 +13,11 @@ import {
 
 describe('buildOpencodeManagedConfig', () => {
   it('pins OpenCode build, YOLO, safe, and plan prompts to the managed prompt file', () => {
-    expect(buildOpencodeManagedConfig({}, '/vault/.claudian/opencode/system.md', 'Yishen')).toEqual({
+    expect(buildOpencodeManagedConfig({}, '/vault/.vauex/opencode/system.md', 'Yishen')).toEqual({
       $schema: 'https://opencode.ai/config.json',
       agent: {
         build: {
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         [OPENCODE_YOLO_MODE_ID]: {
           mode: 'primary',
@@ -25,7 +25,7 @@ describe('buildOpencodeManagedConfig', () => {
             plan_enter: 'allow',
             question: 'allow',
           },
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         [OPENCODE_SAFE_MODE_ID]: {
           mode: 'primary',
@@ -35,10 +35,10 @@ describe('buildOpencodeManagedConfig', () => {
             plan_enter: 'allow',
             question: 'allow',
           },
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         plan: {
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
       },
       username: 'Yishen',
@@ -48,7 +48,7 @@ describe('buildOpencodeManagedConfig', () => {
   it('can create a dedicated aux agent and default it for the process', () => {
     expect(buildOpencodeManagedConfig(
       {},
-      '/vault/.claudian/opencode/aux/system.md',
+      '/vault/.vauex/opencode/aux/system.md',
       undefined,
       [{
         definition: {
@@ -58,22 +58,22 @@ describe('buildOpencodeManagedConfig', () => {
             read: 'allow',
           },
         },
-        id: 'claudian-aux-readonly',
+        id: 'vauex-aux-readonly',
       }],
-      'claudian-aux-readonly',
+      'vauex-aux-readonly',
     )).toEqual({
       $schema: 'https://opencode.ai/config.json',
       agent: {
-        'claudian-aux-readonly': {
+        'vauex-aux-readonly': {
           mode: 'primary',
           permission: {
             '*': 'deny',
             read: 'allow',
           },
-          prompt: '{file:/vault/.claudian/opencode/aux/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/aux/system.md}',
         },
       },
-      default_agent: 'claudian-aux-readonly',
+      default_agent: 'vauex-aux-readonly',
     });
   });
 
@@ -95,7 +95,7 @@ describe('buildOpencodeManagedConfig', () => {
         },
       },
       username: 'Existing',
-    }, '/vault/.claudian/opencode/system.md')).toEqual({
+    }, '/vault/.vauex/opencode/system.md')).toEqual({
       $schema: 'https://opencode.ai/config.json',
       agent: {
         build: {
@@ -104,7 +104,7 @@ describe('buildOpencodeManagedConfig', () => {
             bash: 'ask',
             edit: 'ask',
           },
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         [OPENCODE_YOLO_MODE_ID]: {
           mode: 'primary',
@@ -112,7 +112,7 @@ describe('buildOpencodeManagedConfig', () => {
             plan_enter: 'allow',
             question: 'allow',
           },
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         [OPENCODE_SAFE_MODE_ID]: {
           mode: 'primary',
@@ -122,10 +122,10 @@ describe('buildOpencodeManagedConfig', () => {
             plan_enter: 'allow',
             question: 'allow',
           },
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
         plan: {
-          prompt: '{file:/vault/.claudian/opencode/system.md}',
+          prompt: '{file:/vault/.vauex/opencode/system.md}',
         },
       },
       default_agent: 'build',
@@ -141,7 +141,7 @@ describe('buildOpencodeManagedConfig', () => {
 
 describe('prepareOpencodeLaunchArtifacts', () => {
   it('layers the managed prompt config on top of OPENCODE_CONFIG', async () => {
-    const tmpRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'claudian-opencode-artifacts-'));
+    const tmpRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'vauex-opencode-artifacts-'));
     const baseConfigPath = path.join(tmpRoot, 'opencode.base.json');
     await fs.writeFile(baseConfigPath, JSON.stringify({
       agent: {
@@ -171,8 +171,8 @@ describe('prepareOpencodeLaunchArtifacts', () => {
       workspaceRoot: tmpRoot,
     });
 
-    expect(result.configPath).toBe(path.join(tmpRoot, '.claudian', 'opencode', 'config.json'));
-    expect(result.systemPromptPath).toBe(path.join(tmpRoot, '.claudian', 'opencode', 'system.md'));
+    expect(result.configPath).toBe(path.join(tmpRoot, '.vauex', 'opencode', 'config.json'));
+    expect(result.systemPromptPath).toBe(path.join(tmpRoot, '.vauex', 'opencode', 'system.md'));
     const generatedConfig = JSON.parse(await fs.readFile(result.configPath, 'utf8'));
     expect(generatedConfig).toMatchObject({
       default_agent: 'build',

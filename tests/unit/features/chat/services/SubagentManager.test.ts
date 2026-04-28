@@ -777,7 +777,7 @@ ${inlineOutput}
       const { manager } = createManager();
       setupLinkedAgentOutput(manager, 'task-1', 'agent-untrusted-output', 'out-1');
 
-      const untrustedDir = mkdtempSync(join(process.cwd(), '.claudian-untrusted-'));
+      const untrustedDir = mkdtempSync(join(process.cwd(), '.vauex-untrusted-'));
       const fullOutputFile = join(untrustedDir, 'agent-untrusted.output');
       const fullOutput = [
         JSON.stringify({

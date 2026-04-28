@@ -133,7 +133,7 @@ describe('OpencodeAuxQueryRunner', () => {
     MockAcpSubprocess.mockImplementation(() => mockProcess as any);
     mockPrepareOpencodeLaunchArtifacts.mockResolvedValue({
       configPath: '/tmp/claudian-opencode-aux/config.json',
-      configContent: '{"default_agent":"claudian-aux-passive"}\n',
+      configContent: '{"default_agent":"vauex-aux-passive"}\n',
       databasePath: null,
       launchKey: 'launch-key',
       systemPromptPath: '/tmp/claudian-opencode-aux/system.md',
@@ -154,8 +154,8 @@ describe('OpencodeAuxQueryRunner', () => {
 
     expect(mockPrepareOpencodeLaunchArtifacts).toHaveBeenCalledWith(expect.objectContaining({
       artifactsSubdir: 'opencode/aux/title-gen',
-      defaultAgentId: 'claudian-aux-passive',
-      managedAgents: [expect.objectContaining({ id: 'claudian-aux-passive' })],
+      defaultAgentId: 'vauex-aux-passive',
+      managedAgents: [expect.objectContaining({ id: 'vauex-aux-passive' })],
       systemPromptKey: 'Use this custom system prompt.',
       systemPromptText: 'Use this custom system prompt.',
     }));
@@ -167,7 +167,7 @@ describe('OpencodeAuxQueryRunner', () => {
       configId: 'mode',
       sessionId: 'session-1',
       type: 'select',
-      value: 'claudian-aux-passive',
+      value: 'vauex-aux-passive',
     });
     expect(mockConnection.setConfigOption).toHaveBeenCalledWith({
       configId: 'model',
@@ -228,7 +228,7 @@ describe('OpencodeAuxQueryRunner', () => {
       configId: 'mode',
       sessionId: 'session-1',
       type: 'select',
-      value: 'claudian-aux-passive',
+      value: 'vauex-aux-passive',
     });
   });
 

@@ -1249,7 +1249,7 @@ export class CodexChatRuntime implements ChatRuntime {
 
     try {
       if (images && images.length > 0) {
-        tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'claudian-codex-images-'));
+        tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'vauex-codex-images-'));
         for (let i = 0; i < images.length; i++) {
           const img = images[i];
           if (!img.mediaType.startsWith('image/')) continue;

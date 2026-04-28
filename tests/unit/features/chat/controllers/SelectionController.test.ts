@@ -69,10 +69,10 @@ function createMockEventTarget() {
 
 function createMockContextRow() {
   const elements: Record<string, any> = {
-    '.claudian-selection-indicator': { style: { display: 'none' } },
-    '.claudian-canvas-indicator': { style: { display: 'none' } },
-    '.claudian-file-indicator': null,
-    '.claudian-image-preview': null,
+    '.vauex-selection-indicator': { style: { display: 'none' } },
+    '.vauex-canvas-indicator': { style: { display: 'none' } },
+    '.vauex-file-indicator': null,
+    '.vauex-image-preview': null,
   };
 
   return {
@@ -345,7 +345,7 @@ describe('SelectionController', () => {
 
       expect(showSelectionHighlight).not.toHaveBeenCalled();
       expect(mockHighlights.set).toHaveBeenCalledWith(
-        'claudian-selection',
+        'vauex-selection',
         expect.any(Object),
       );
     });
@@ -369,7 +369,7 @@ describe('SelectionController', () => {
       controller.showHighlight();
 
       expect(mockHighlights.set).toHaveBeenCalledWith(
-        'claudian-selection',
+        'vauex-selection',
         expect.any(Object),
       );
     });
@@ -460,7 +460,7 @@ describe('SelectionController', () => {
       );
       jest.advanceTimersByTime(250);
 
-      expect(mockHighlights.delete).toHaveBeenCalledWith('claudian-selection');
+      expect(mockHighlights.delete).toHaveBeenCalledWith('vauex-selection');
     });
 
     it('skips CSS highlight for disconnected DOM ranges', () => {
@@ -515,7 +515,7 @@ describe('SelectionController', () => {
       controller.showHighlight();
 
       expect(mockHighlights.set).toHaveBeenCalledWith(
-        'claudian-selection',
+        'vauex-selection',
         { ranges: [secondRange] },
       );
     });
@@ -587,7 +587,7 @@ describe('SelectionController', () => {
   it('keeps context row visible when canvas selection indicator is visible', () => {
     const canvasIndicator = { style: { display: 'block' } };
     contextRowEl.querySelector.mockImplementation((selector: string) => {
-      if (selector === '.claudian-canvas-indicator') return canvasIndicator;
+      if (selector === '.vauex-canvas-indicator') return canvasIndicator;
       return null;
     });
 

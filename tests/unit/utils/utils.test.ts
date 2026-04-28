@@ -144,7 +144,7 @@ describe('utils.ts', () => {
 
   describe('expandHomePath', () => {
     const envKey = 'CLAUDIAN_TEST_PATH';
-    const envValue = path.join(os.tmpdir(), 'claudian-env');
+    const envValue = path.join(os.tmpdir(), 'vauex-env');
     let originalValue: string | undefined;
 
     beforeEach(() => {

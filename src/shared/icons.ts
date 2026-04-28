@@ -18,11 +18,11 @@ export const OPENCODE_PROVIDER_ICON: ProviderIconSvg = {
   kind: 'markup',
   viewBox: '0 0 300 300',
   markup: `
-    <g class="claudian-provider-icon-variant claudian-provider-icon-variant--light" transform="translate(30 0)">
+    <g class="vauex-provider-icon-variant vauex-provider-icon-variant--light" transform="translate(30 0)">
       <path d="M180 240H60V120H180V240Z" fill="#CFCECD"></path>
       <path d="M180 60H60V240H180V60ZM240 300H0V0H240V300Z" fill="#211E1E"></path>
     </g>
-    <g class="claudian-provider-icon-variant claudian-provider-icon-variant--dark" transform="translate(30 0)">
+    <g class="vauex-provider-icon-variant vauex-provider-icon-variant--dark" transform="translate(30 0)">
       <path d="M180 240H60V120H180V240Z" fill="#4B4646"></path>
       <path d="M180 60H60V240H180V60ZM240 300H0V0H240V300Z" fill="#F1ECEC"></path>
     </g>
@@ -45,7 +45,7 @@ export function createProviderIconSvg(
   svg.setAttribute('viewBox', icon.viewBox);
   svg.setAttribute('fill', 'none');
   svg.setAttribute('aria-hidden', 'true');
-  svg.classList.add('claudian-provider-icon');
+  svg.classList.add('vauex-provider-icon');
 
   if (options.width !== undefined) {
     svg.setAttribute('width', String(options.width));

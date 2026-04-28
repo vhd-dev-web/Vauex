@@ -1,16 +1,16 @@
-.claudian-tab-bar-container {
+.vauex-tab-bar-container {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.claudian-tab-badges {
+.vauex-tab-badges {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.claudian-tab-badge {
+.vauex-tab-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,41 +26,41 @@
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
-.claudian-tab-badge:hover {
+.vauex-tab-badge:hover {
   background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.claudian-tab-badge-active {
+.vauex-tab-badge-active {
   border-color: var(--interactive-accent);
   color: var(--text-normal);
 }
 
-.claudian-tab-badge-streaming {
-  border-color: var(--claudian-brand, #da7756);
+.vauex-tab-badge-streaming {
+  border-color: var(--vauex-brand, #da7756);
 }
 
-.claudian-tab-badge-streaming[data-provider="claude"] {
-  border-color: var(--claudian-brand-claude, #D97757);
+.vauex-tab-badge-streaming[data-provider="claude"] {
+  border-color: var(--vauex-brand-claude, #D97757);
 }
 
-.claudian-tab-badge-streaming[data-provider="codex"] {
-  border-color: var(--claudian-brand-codex, #d0d0d0);
+.vauex-tab-badge-streaming[data-provider="codex"] {
+  border-color: var(--vauex-brand-codex, #d0d0d0);
 }
 
-.claudian-tab-badge-streaming[data-provider="opencode"] {
-  border-color: var(--claudian-brand-opencode, #C8C8C8);
+.vauex-tab-badge-streaming[data-provider="opencode"] {
+  border-color: var(--vauex-brand-opencode, #C8C8C8);
 }
 
-.claudian-tab-badge-attention {
+.vauex-tab-badge-attention {
   border-color: var(--text-error);
 }
 
-.claudian-tab-badge-idle {
+.vauex-tab-badge-idle {
   border-color: var(--background-modifier-border);
 }
 
-.claudian-tab-content-container {
+.vauex-tab-content-container {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -68,7 +68,7 @@
   overflow: hidden;
 }
 
-.claudian-tab-content {
+.vauex-tab-content {
   position: relative; /* For scroll-to-bottom button positioning */
   display: flex;
   flex-direction: column;

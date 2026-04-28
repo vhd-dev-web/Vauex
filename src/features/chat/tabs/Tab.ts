@@ -240,7 +240,7 @@ function refreshTabProviderUI(tab: TabData, plugin: ClaudianPlugin): void {
   tab.ui.permissionToggle?.updateDisplay();
   tab.ui.serviceTierToggle?.updateDisplay();
   tab.dom.inputWrapper.toggleClass(
-    'claudian-input-plan-mode',
+    'vauex-input-plan-mode',
     permissionMode === 'plan' && capabilities.supportsPlanMode,
   );
 }
@@ -357,7 +357,7 @@ export function createTab(options: TabCreateOptions): TabData {
 
   const id = tabId ?? generateTabId();
 
-  const contentEl = containerEl.createDiv({ cls: 'claudian-tab-content' });
+  const contentEl = containerEl.createDiv({ cls: 'vauex-tab-content' });
   contentEl.style.display = 'none';
 
   const state = new ChatState({
@@ -448,7 +448,7 @@ function autoResizeTextarea(textarea: HTMLTextAreaElement): void {
   textarea.style.minHeight = '';
 
   // Calculate max height: 55% of view height, minimum 150px
-  const viewHeight = textarea.closest('.claudian-container')?.clientHeight ?? window.innerHeight;
+  const viewHeight = textarea.closest('.vauex-container')?.clientHeight ?? window.innerHeight;
   const maxHeight = Math.max(TEXTAREA_MIN_MAX_HEIGHT, viewHeight * TEXTAREA_MAX_HEIGHT_PERCENT);
 
   // Get flex-allocated height (what flexbox gives the textarea)
@@ -471,17 +471,17 @@ function autoResizeTextarea(textarea: HTMLTextAreaElement): void {
  * Builds the DOM structure for a tab.
  */
 function buildTabDOM(contentEl: HTMLElement): TabDOMElements {
-  const messagesWrapperEl = contentEl.createDiv({ cls: 'claudian-messages-wrapper' });
-  const messagesEl = messagesWrapperEl.createDiv({ cls: 'claudian-messages' });
-  const welcomeEl = messagesEl.createDiv({ cls: 'claudian-welcome' });
-  const statusPanelContainerEl = contentEl.createDiv({ cls: 'claudian-status-panel-container' });
-  const inputContainerEl = contentEl.createDiv({ cls: 'claudian-input-container' });
-  const queueIndicatorEl = inputContainerEl.createDiv({ cls: 'claudian-input-queue-row' });
-  const navRowEl = inputContainerEl.createDiv({ cls: 'claudian-input-nav-row' });
-  const inputWrapper = inputContainerEl.createDiv({ cls: 'claudian-input-wrapper' });
-  const contextRowEl = inputWrapper.createDiv({ cls: 'claudian-context-row' });
+  const messagesWrapperEl = contentEl.createDiv({ cls: 'vauex-messages-wrapper' });
+  const messagesEl = messagesWrapperEl.createDiv({ cls: 'vauex-messages' });
+  const welcomeEl = messagesEl.createDiv({ cls: 'vauex-welcome' });
+  const statusPanelContainerEl = contentEl.createDiv({ cls: 'vauex-status-panel-container' });
+  const inputContainerEl = contentEl.createDiv({ cls: 'vauex-input-container' });
+  const queueIndicatorEl = inputContainerEl.createDiv({ cls: 'vauex-input-queue-row' });
+  const navRowEl = inputContainerEl.createDiv({ cls: 'vauex-input-nav-row' });
+  const inputWrapper = inputContainerEl.createDiv({ cls: 'vauex-input-wrapper' });
+  const contextRowEl = inputWrapper.createDiv({ cls: 'vauex-context-row' });
   const inputEl = inputWrapper.createEl('textarea', {
-    cls: 'claudian-input',
+    cls: 'vauex-input',
     attr: {
       placeholder: 'How can I help you today?',
       rows: '3',
@@ -745,7 +745,7 @@ function initializeInputToolbar(
 ): void {
   const { dom } = tab;
 
-  const inputToolbar = dom.inputWrapper.createDiv({ cls: 'claudian-input-toolbar' });
+  const inputToolbar = dom.inputWrapper.createDiv({ cls: 'vauex-input-toolbar' });
 
   // Blank-tab UI config wrapper that returns mixed model options
   const blankTabUIConfigProxy = (): ProviderChatUIConfig => {
@@ -874,7 +874,7 @@ function initializeInputToolbar(
       });
       tab.ui.permissionToggle?.updateDisplay();
       dom.inputWrapper.toggleClass(
-        'claudian-input-plan-mode',
+        'vauex-input-plan-mode',
         mode === 'plan' && getTabCapabilities(tab, plugin).supportsPlanMode,
       );
     },
@@ -938,13 +938,13 @@ export function initializeTabUI(
   initializeContextManagers(tab, plugin);
 
   // Selection indicator - add to contextRowEl
-  dom.selectionIndicatorEl = dom.contextRowEl.createDiv({ cls: 'claudian-selection-indicator' });
+  dom.selectionIndicatorEl = dom.contextRowEl.createDiv({ cls: 'vauex-selection-indicator' });
   dom.selectionIndicatorEl.style.display = 'none';
 
-  dom.browserIndicatorEl = dom.contextRowEl.createDiv({ cls: 'claudian-browser-selection-indicator' });
+  dom.browserIndicatorEl = dom.contextRowEl.createDiv({ cls: 'vauex-browser-selection-indicator' });
   dom.browserIndicatorEl.style.display = 'none';
 
-  dom.canvasIndicatorEl = dom.contextRowEl.createDiv({ cls: 'claudian-canvas-indicator' });
+  dom.canvasIndicatorEl = dom.contextRowEl.createDiv({ cls: 'vauex-canvas-indicator' });
   dom.canvasIndicatorEl.style.display = 'none';
 
   const catalogInfo = options.getProviderCatalogConfig?.() ?? null;
@@ -1753,7 +1753,7 @@ export function updatePlanModeUI(tab: TabData, plugin: ClaudianPlugin, mode: str
   void plugin.saveSettings();
   tab.ui.permissionToggle?.updateDisplay();
   tab.dom.inputWrapper.toggleClass(
-    'claudian-input-plan-mode',
+    'vauex-input-plan-mode',
     mode === 'plan' && getTabCapabilities(tab, plugin).supportsPlanMode,
   );
 }

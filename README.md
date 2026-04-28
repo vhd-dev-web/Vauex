@@ -79,7 +79,7 @@ Native Windows usually points to `codex.exe`. WSL mode expects a Linux command s
 
 Vauex sends your prompts, selected context, attachments, tool results, and agent-visible vault content to the configured Codex/OpenAI runtime. Vauex does not add telemetry.
 
-Local state currently uses the legacy `.claudian/` storage directory for migration safety. Codex transcripts are stored by Codex under `~/.codex/sessions/`.
+Local Vauex state is stored under `.vauex/`. Legacy `.claudian/` state is read as an import source for migration compatibility. Codex transcripts are stored by Codex under `~/.codex/sessions/`.
 
 ## Release Files
 

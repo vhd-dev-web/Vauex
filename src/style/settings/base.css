@@ -1,13 +1,13 @@
 /* ── Settings tab navigation ── */
 
-.claudian-settings-tabs {
+.vauex-settings-tabs {
   display: flex;
   gap: 2px;
   border-bottom: 1px solid var(--background-modifier-border);
   margin-bottom: 16px;
 }
 
-.claudian-settings-tab {
+.vauex-settings-tab {
   padding: 8px 16px;
   border: none;
   background: transparent;
@@ -20,25 +20,25 @@
   margin-bottom: -1px;
 }
 
-.claudian-settings-tab:hover {
+.vauex-settings-tab:hover {
   color: var(--text-normal);
 }
 
-.claudian-settings-tab--active {
+.vauex-settings-tab--active {
   color: var(--text-normal);
   border-bottom-color: var(--interactive-accent);
 }
 
-.claudian-settings-tab-content {
+.vauex-settings-tab-content {
   display: none;
 }
 
-.claudian-settings-tab-content--active {
+.vauex-settings-tab-content--active {
   display: block;
 }
 
 /* Codex placeholder */
-.claudian-settings-codex-placeholder {
+.vauex-settings-codex-placeholder {
   padding: 40px 20px;
   text-align: center;
   color: var(--text-muted);
@@ -46,39 +46,39 @@
 }
 
 /* Settings page - remove separator lines from setting items */
-.claudian-settings .setting-item {
+.vauex-settings .setting-item {
   border-top: none;
 }
 
 /* Settings section headings (via setHeading()) */
-.claudian-settings .setting-item-heading {
+.vauex-settings .setting-item-heading {
   padding-top: 18px;
   margin-top: 12px;
   border-top: 1px solid var(--background-modifier-border);
 }
 
-.claudian-settings .setting-item-heading:first-child {
+.vauex-settings .setting-item-heading:first-child {
   padding-top: 0;
   margin-top: 0;
   border-top: none;
 }
 
-.claudian-settings .setting-item-heading .setting-item-name {
+.vauex-settings .setting-item-heading .setting-item-name {
   font-size: var(--font-ui-medium);
   font-weight: var(--font-semibold);
   color: var(--text-normal);
 }
 
 /* Custom section descriptions - align with items */
-.claudian-sp-settings-desc,
-.claudian-mcp-settings-desc,
-.claudian-plugin-settings-desc,
-.claudian-approved-desc {
+.vauex-sp-settings-desc,
+.vauex-mcp-settings-desc,
+.vauex-plugin-settings-desc,
+.vauex-approved-desc {
   padding: 0 12px;
 }
 
 /* Unified icon action buttons for settings */
-.claudian-settings-action-btn {
+.vauex-settings-action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,29 +93,29 @@
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.claudian-settings-action-btn:hover {
+.vauex-settings-action-btn:hover {
   background: var(--background-modifier-hover);
   color: var(--text-normal);
 }
 
-.claudian-settings-action-btn svg {
+.vauex-settings-action-btn svg {
   width: 14px;
   height: 14px;
 }
 
-.claudian-settings-delete-btn:hover {
+.vauex-settings-delete-btn:hover {
   color: var(--text-error);
 }
 
 /* Hotkey grid - 3 columns */
-.claudian-hotkey-grid {
+.vauex-hotkey-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4px 12px;
   padding: 4px 0;
 }
 
-.claudian-hotkey-item {
+.vauex-hotkey-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -124,17 +124,17 @@
   border-radius: 6px;
 }
 
-.claudian-hotkey-item:hover {
+.vauex-hotkey-item:hover {
   background: var(--background-modifier-hover);
 }
 
-.claudian-hotkey-name {
+.vauex-hotkey-name {
   flex: 1;
   color: var(--text-normal);
   font-size: var(--font-ui-small);
 }
 
-.claudian-hotkey-badge {
+.vauex-hotkey-badge {
   color: var(--text-muted);
   font-size: var(--font-ui-smaller);
   background: var(--background-modifier-hover);
@@ -144,13 +144,13 @@
 }
 
 /* Media folder input width */
-.claudian-settings-media-input {
+.vauex-settings-media-input {
   width: 200px;
 }
 
 /* ── Shared settings panel layout (used by slash-settings + agent-settings) ── */
 
-.claudian-sp-header {
+.vauex-sp-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -158,18 +158,18 @@
   padding: 0 12px;
 }
 
-.claudian-sp-label {
+.vauex-sp-label {
   font-size: var(--font-ui-small);
   color: var(--text-muted);
   font-weight: var(--font-medium);
 }
 
-.claudian-sp-header-actions {
+.vauex-sp-header-actions {
   display: flex;
   gap: 4px;
 }
 
-.claudian-sp-empty-state {
+.vauex-sp-empty-state {
   padding: 20px;
   text-align: center;
   color: var(--text-muted);
@@ -178,14 +178,14 @@
   margin-top: 8px;
 }
 
-.claudian-sp-list {
+.vauex-sp-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 8px;
 }
 
-.claudian-sp-item {
+.vauex-sp-item {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -194,48 +194,48 @@
   border-radius: 6px;
 }
 
-.claudian-sp-item:hover {
+.vauex-sp-item:hover {
   background: var(--background-modifier-hover);
 }
 
-.claudian-sp-info {
+.vauex-sp-info {
   flex: 1;
   min-width: 0;
 }
 
-.claudian-sp-item-header {
+.vauex-sp-item-header {
   display: flex;
   align-items: baseline;
   gap: 8px;
 }
 
-.claudian-sp-item-name {
+.vauex-sp-item-name {
   font-weight: 600;
   font-family: var(--font-monospace);
   color: var(--text-normal);
 }
 
-.claudian-sp-item-desc {
+.vauex-sp-item-desc {
   font-size: 13px;
   color: var(--text-muted);
   margin-top: 2px;
 }
 
-.claudian-sp-item-actions {
+.vauex-sp-item-actions {
   display: flex;
   gap: 4px;
   margin-left: 16px;
   flex-shrink: 0;
 }
 
-.claudian-sp-advanced-section {
+.vauex-sp-advanced-section {
   border: 1px solid var(--background-modifier-border);
   border-radius: 6px;
   padding: 0 12px;
   margin: 8px 0;
 }
 
-.claudian-sp-advanced-summary {
+.vauex-sp-advanced-summary {
   cursor: pointer;
   padding: 8px 0;
   font-size: var(--font-ui-small);
@@ -243,16 +243,16 @@
   font-weight: var(--font-medium);
 }
 
-.claudian-sp-advanced-section[open] .claudian-sp-advanced-summary {
+.vauex-sp-advanced-section[open] .vauex-sp-advanced-summary {
   margin-bottom: 4px;
 }
 
-.claudian-sp-modal .modal-content {
+.vauex-sp-modal .modal-content {
   max-width: 600px;
   width: auto;
 }
 
-.claudian-sp-content-area {
+.vauex-sp-content-area {
   width: 100%;
   font-family: var(--font-monospace);
   font-size: 13px;
@@ -265,12 +265,12 @@
   margin-top: 8px;
 }
 
-.claudian-sp-content-area:focus {
+.vauex-sp-content-area:focus {
   outline: none;
   border-color: var(--interactive-accent);
 }
 
-.claudian-sp-modal-buttons {
+.vauex-sp-modal-buttons {
   display: flex;
   gap: 8px;
   margin-top: 16px;

@@ -44,7 +44,7 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
 
     new Setting(container).setName(t('settings.setup')).setHeading();
 
-    const setupStatus = container.createDiv({ cls: 'claudian-codex-setup-status' });
+    const setupStatus = container.createDiv({ cls: 'vauex-codex-setup-status' });
     setupStatus.createEl('p', {
       cls: 'setting-item-description',
       text: resolvedCliPath
@@ -108,7 +108,7 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
       .setName(`Codex CLI path (${hostnameKey})`)
       .setDesc(getCliPathCopy().desc);
 
-    const validationEl = container.createDiv({ cls: 'claudian-cli-path-validation' });
+    const validationEl = container.createDiv({ cls: 'vauex-cli-path-validation' });
     validationEl.style.color = 'var(--text-error)';
     validationEl.style.fontSize = '0.85em';
     validationEl.style.marginTop = '-0.5em';
@@ -208,7 +208,7 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
         .onChange(async (value) => {
           await persistCliPath(value);
         });
-      text.inputEl.addClass('claudian-settings-cli-path-input');
+      text.inputEl.addClass('vauex-settings-cli-path-input');
       text.inputEl.style.width = '100%';
       cliPathInputEl = text.inputEl;
 
@@ -231,7 +231,7 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
             await context.plugin.saveSettings();
           });
 
-        text.inputEl.addClass('claudian-settings-cli-path-input');
+        text.inputEl.addClass('vauex-settings-cli-path-input');
         text.inputEl.style.width = '100%';
         text.inputEl.disabled = installationMethod !== 'wsl';
         wslDistroInputEl = text.inputEl;
@@ -385,13 +385,13 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
     if (codexCatalog) {
       new Setting(container).setName('Codex Skills').setHeading();
 
-      const skillsDesc = container.createDiv({ cls: 'claudian-sp-settings-desc' });
+      const skillsDesc = container.createDiv({ cls: 'vauex-sp-settings-desc' });
       skillsDesc.createEl('p', {
         cls: 'setting-item-description',
         text: 'Manage vault-level Codex skills stored in .codex/skills/ or .agents/skills/. Home-level skills are excluded here.',
       });
 
-      const skillsContainer = container.createDiv({ cls: 'claudian-slash-commands-container' });
+      const skillsContainer = container.createDiv({ cls: 'vauex-slash-commands-container' });
       new CodexSkillSettings(skillsContainer, codexCatalog, context.plugin.app);
     }
 
@@ -405,13 +405,13 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
 
     new Setting(container).setName('Codex Subagents').setHeading();
 
-    const subagentDesc = container.createDiv({ cls: 'claudian-sp-settings-desc' });
+    const subagentDesc = container.createDiv({ cls: 'vauex-sp-settings-desc' });
     subagentDesc.createEl('p', {
       cls: 'setting-item-description',
       text: 'Manage vault-level Codex subagents stored in .codex/agents/. Each TOML file defines one custom agent.',
     });
 
-    const subagentContainer = container.createDiv({ cls: 'claudian-slash-commands-container' });
+    const subagentContainer = container.createDiv({ cls: 'vauex-slash-commands-container' });
     new CodexSubagentSettings(subagentContainer, codexWorkspace.subagentStorage, context.plugin.app, () => {
       void codexWorkspace.refreshAgentMentions?.();
     });
@@ -419,7 +419,7 @@ export const codexSettingsTabRenderer: ProviderSettingsTabRenderer = {
     // --- MCP Servers ---
 
     new Setting(container).setName(t('settings.mcpServers.name')).setHeading();
-    const mcpNotice = container.createDiv({ cls: 'claudian-mcp-settings-desc' });
+    const mcpNotice = container.createDiv({ cls: 'vauex-mcp-settings-desc' });
     const mcpDesc = mcpNotice.createEl('p', { cls: 'setting-item-description' });
     mcpDesc.appendText('Codex manages MCP servers via its own CLI. Configure with ');
     mcpDesc.createEl('code', { text: 'codex mcp' });
