@@ -1,5 +1,5 @@
 import { ProviderRegistry } from '../providers/ProviderRegistry';
-import { DEFAULT_CHAT_PROVIDER_ID } from '../providers/types';
+import { LEGACY_CHAT_PROVIDER_ID } from '../providers/types';
 import type { VaultFileAdapter } from '../storage/VaultFileAdapter';
 import type {
   Conversation,
@@ -84,7 +84,7 @@ export class SessionStorage {
 
     const metas: ConversationMeta[] = nativeMetas.map((meta) => ({
       id: meta.id,
-      providerId: meta.providerId ?? DEFAULT_CHAT_PROVIDER_ID,
+      providerId: meta.providerId ?? LEGACY_CHAT_PROVIDER_ID,
       title: meta.title,
       createdAt: meta.createdAt,
       updatedAt: meta.updatedAt,

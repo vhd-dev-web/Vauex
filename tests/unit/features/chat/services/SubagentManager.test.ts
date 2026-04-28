@@ -7,6 +7,7 @@ import { join } from 'path';
 import type { SubagentInfo, ToolCallInfo } from '@/core/types';
 import { SubagentManager } from '@/features/chat/services/SubagentManager';
 import { createStopSubagentHook } from '@/providers/claude/hooks/SubagentHooks';
+import { ClaudeTaskResultInterpreter } from '@/providers/claude/runtime/ClaudeTaskResultInterpreter';
 
 jest.mock('@/features/chat/rendering/SubagentRenderer', () => ({
   createSubagentBlock: jest.fn().mockImplementation((_parentEl: any, toolId: string, input: any) => ({
@@ -49,7 +50,7 @@ const createManager = () => {
   const updates: SubagentInfo[] = [];
   const manager = new SubagentManager((subagent) => {
     updates.push({ ...subagent });
-  });
+  }, new ClaudeTaskResultInterpreter());
   return { manager, updates };
 };
 
@@ -776,8 +777,7 @@ ${inlineOutput}
       const { manager } = createManager();
       setupLinkedAgentOutput(manager, 'task-1', 'agent-untrusted-output', 'out-1');
 
-      const homeDir = process.env.HOME ?? process.cwd();
-      const untrustedDir = mkdtempSync(join(homeDir, '.claudian-untrusted-'));
+      const untrustedDir = mkdtempSync(join(process.cwd(), '.claudian-untrusted-'));
       const fullOutputFile = join(untrustedDir, 'agent-untrusted.output');
       const fullOutput = [
         JSON.stringify({

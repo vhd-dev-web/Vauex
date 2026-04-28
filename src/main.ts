@@ -20,7 +20,7 @@ import { ProviderSettingsCoordinator } from './core/providers/ProviderSettingsCo
 import { ProviderWorkspaceRegistry } from './core/providers/ProviderWorkspaceRegistry';
 import type { ProviderId } from './core/providers/types';
 import type { AppTabManagerState } from './core/providers/types';
-import { DEFAULT_CHAT_PROVIDER_ID } from './core/providers/types';
+import { DEFAULT_CHAT_PROVIDER_ID, LEGACY_CHAT_PROVIDER_ID } from './core/providers/types';
 import type {
   ClaudianSettings,
   Conversation,
@@ -299,7 +299,7 @@ export default class ClaudianPlugin extends Plugin {
 
       return {
         id: meta.id,
-        providerId: meta.providerId ?? DEFAULT_CHAT_PROVIDER_ID,
+        providerId: meta.providerId ?? LEGACY_CHAT_PROVIDER_ID,
         title: meta.title,
         createdAt: meta.createdAt,
         updatedAt: meta.updatedAt,

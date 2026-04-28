@@ -92,6 +92,7 @@ function createMockPlugin(settings: Record<string, unknown> = {}) {
 
   const mockPlugin = {
     settings: {
+      settingsProvider: 'claude',
       permissions: [], // Legacy field (for backwards compat tests)
       permissionMode: 'yolo',
       loadUserClaudeSettings: false,
@@ -99,6 +100,14 @@ function createMockPlugin(settings: Record<string, unknown> = {}) {
       systemPrompt: '',
       model: 'claude-sonnet-4-5',
       thinkingBudget: 'off',
+      providerConfigs: {
+        claude: {
+          customModels: 'custom-model',
+        },
+      },
+      savedProviderModel: {
+        claude: 'claude-sonnet-4-5',
+      },
       ...settings,
     },
     app: {

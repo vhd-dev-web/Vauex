@@ -959,7 +959,7 @@ describe('ClaudianPlugin', () => {
     it('should load from forkSource.sessionId and truncate at forkSource.resumeAt for pending fork', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           forkSource: { sessionId: 'source-session-abc', resumeAt: 'asst-uuid-cutoff' },
@@ -1004,7 +1004,7 @@ describe('ClaudianPlugin', () => {
     it('should NOT use fork path when conversation has its own providerSessionId', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           forkSource: { sessionId: 'source-session', resumeAt: 'asst-uuid' },
@@ -1035,7 +1035,7 @@ describe('ClaudianPlugin', () => {
     it('restores subagent data when Task tool exists but subagent content block is missing', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-subagent-recovery',
@@ -1113,7 +1113,7 @@ describe('ClaudianPlugin', () => {
     it('prefers richer SDK task result over stale cached subagent result', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-subagent-merge',
@@ -1174,7 +1174,7 @@ describe('ClaudianPlugin', () => {
     it('keeps the richer cached async result when both SDK and cache are terminal', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-subagent-cache-richer',
@@ -1243,7 +1243,7 @@ describe('ClaudianPlugin', () => {
     it('drops stale asyncStatus from cached sync subagents during recovery', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-sync-subagent-cleanup',
@@ -1299,7 +1299,7 @@ describe('ClaudianPlugin', () => {
     it('prefers terminal SDK async status over stale cached running state', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-async-sdk-terminal',
@@ -1369,7 +1369,7 @@ describe('ClaudianPlugin', () => {
     it('prefers cached terminal async status over SDK launch-only running state', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-async-cache-terminal',
@@ -1440,7 +1440,7 @@ describe('ClaudianPlugin', () => {
     it('restores async subagent data and mode when Task tool exists but async block is missing', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-async-subagent-recovery',
@@ -1509,7 +1509,7 @@ describe('ClaudianPlugin', () => {
     it('hydrates async subagent tool calls from SDK subagent files on reload', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-async-subagent-tools',
@@ -1589,7 +1589,7 @@ describe('ClaudianPlugin', () => {
     it('keeps async subagent renderer visible when task block and task tool call are both missing', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation();
+      const conv = await plugin.createConversation({ providerId: 'claude' });
       await plugin.updateConversation(conv.id, {
         providerState: {
           providerSessionId: 'session-async-subagent-fallback',

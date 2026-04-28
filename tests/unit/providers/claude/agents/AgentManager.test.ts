@@ -12,6 +12,10 @@ import type { PluginManager } from '@/providers/claude/plugins/PluginManager';
 
 const mockFs = jest.mocked(fs);
 
+function normalizeFsPathForTest(value: string): string {
+  return value.replace(/\\/g, '/');
+}
+
 // Create a mock PluginManager
 function createMockPluginManager(plugins: Array<{ name: string; enabled: boolean; installPath: string }> = []): PluginManager {
   return {
@@ -560,7 +564,7 @@ describe('AgentManager', () => {
       // Vault has an agent file matching an init agent name
       mockFs.existsSync.mockReturnValue(true);
       (mockFs.readdirSync as jest.Mock).mockImplementation((dir: string) => {
-        if (dir.includes('.claude/agents')) {
+        if (normalizeFsPathForTest(dir).includes('.claude/agents')) {
           return [createMockDirent('custom.md', true)];
         }
         return [];

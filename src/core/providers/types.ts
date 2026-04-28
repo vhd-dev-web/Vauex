@@ -38,6 +38,7 @@ export interface ProviderCapabilities {
 }
 
 export const DEFAULT_CHAT_PROVIDER_ID = 'codex' as const satisfies ProviderId;
+export const LEGACY_CHAT_PROVIDER_ID = 'claude' as const satisfies ProviderId;
 
 export interface CreateChatRuntimeOptions {
   plugin: ClaudianPlugin;
