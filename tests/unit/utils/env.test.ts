@@ -23,6 +23,10 @@ const {
 const isWindows = process.platform === 'win32';
 const SEP = isWindows ? ';' : ':';
 
+function normalizeFsPathForTest(value: string): string {
+  return value.replace(/\\/g, '/');
+}
+
 describe('parseEnvironmentVariables', () => {
   it('parses simple KEY=VALUE pairs', () => {
     const input = 'FOO=bar\nBAZ=qux';
@@ -1177,7 +1181,7 @@ describe('Obsidian CLI path integration', () => {
 
     const mod = loadWithPlatform('darwin', helperExecPath);
     const result = mod.getEnhancedPath();
-    const segments = result.split(':');
+    const segments = result.split(':').map(normalizeFsPathForTest);
 
     expect(segments).toContain('/Applications/Obsidian.app/Contents/MacOS');
     expect(segments).not.toContain('/Applications/Obsidian.app/Contents/Frameworks/Obsidian Helper (Renderer).app/Contents/MacOS');
@@ -1191,9 +1195,9 @@ describe('Obsidian CLI path integration', () => {
 
     const mod = loadWithPlatform('linux', appImageExecPath);
     const result = mod.getEnhancedPath();
-    const segments = result.split(':');
+    const segments = result.split(':').map(normalizeFsPathForTest);
 
-    expect(segments).not.toContain(appImageDir);
+    expect(segments).not.toContain(normalizeFsPathForTest(appImageDir));
     expect(segments).toContain('/usr/local/bin');
     expect(segments).toContain('/home/test/.local/bin');
   });

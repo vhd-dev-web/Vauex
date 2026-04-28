@@ -27,6 +27,10 @@ const MockAcpJsonRpcTransport = AcpJsonRpcTransport as jest.MockedClass<typeof A
 const MockAcpSubprocess = AcpSubprocess as jest.MockedClass<typeof AcpSubprocess>;
 const mockPrepareOpencodeLaunchArtifacts = prepareOpencodeLaunchArtifacts as jest.MockedFunction<typeof prepareOpencodeLaunchArtifacts>;
 
+function normalizeFsPathForTest(value: string): string {
+  return value.replace(/\\/g, '/');
+}
+
 function createMockPlugin(settings: Record<string, unknown> = {}) {
   return {
     settings: {
@@ -312,8 +316,7 @@ describe('OpencodeAuxQueryRunner', () => {
     expect(() => (runner as any).resolveSessionPath('session-1', '/tmp/outside.md')).toThrow(
       'OpenCode aux read access is limited to the current workspace.',
     );
-    expect((runner as any).resolveSessionPath('session-1', '/tmp/claudian-test-vault/notes/today.md')).toBe(
-      '/tmp/claudian-test-vault/notes/today.md',
-    );
+    const resolved = (runner as any).resolveSessionPath('session-1', '/tmp/claudian-test-vault/notes/today.md');
+    expect(normalizeFsPathForTest(resolved)).toMatch(/\/tmp\/claudian-test-vault\/notes\/today\.md$/);
   });
 });
