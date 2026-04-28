@@ -25,8 +25,14 @@ import { buildCursorContext } from '@/utils/editor';
 function createMockPlugin(settings = {}) {
   return {
     settings: {
+      settingsProvider: 'claude',
       model: 'sonnet',
       thinkingBudget: 'off',
+      providerConfigs: {
+        claude: {
+          customModels: 'custom-model',
+        },
+      },
       ...settings,
     },
     app: {

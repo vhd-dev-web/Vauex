@@ -267,8 +267,17 @@ describe('ClaudianPlugin', () => {
       mockApp.vault.adapter.read.mockImplementation(async (path: string) => {
         if (path === '.claudian/claudian-settings.json') {
           return JSON.stringify({
+            settingsProvider: 'claude',
             environmentVariables: 'ANTHROPIC_MODEL=custom-model',
             lastEnvHash: '',
+            providerConfigs: {
+              claude: {
+                customModels: 'custom-model',
+              },
+            },
+            savedProviderModel: {
+              claude: 'haiku',
+            },
           });
         }
         return '';
@@ -330,7 +339,7 @@ describe('ClaudianPlugin', () => {
     it('invalidates sessions when env hash changes', async () => {
       await plugin.onload();
 
-      const conv = await plugin.createConversation({ sessionId: 'session-123' });
+      const conv = await plugin.createConversation({ providerId: 'claude', sessionId: 'session-123' });
       const saveMetadataSpy = jest.spyOn(plugin.storage.sessions, 'saveMetadata');
       saveMetadataSpy.mockClear();
 
@@ -744,6 +753,7 @@ describe('ClaudianPlugin', () => {
         title: 'Saved Chat',
         createdAt: timestamp,
         updatedAt: timestamp,
+        providerId: 'claude',
         sessionId: 'saved-session',
       });
 
@@ -792,6 +802,7 @@ describe('ClaudianPlugin', () => {
         title: 'Saved Chat',
         createdAt: timestamp,
         updatedAt: timestamp,
+        providerId: 'claude',
         sessionId: 'saved-session',
       });
 
@@ -810,8 +821,13 @@ describe('ClaudianPlugin', () => {
         if (path === '.claudian/claudian-settings.json') {
           // All these fields are now in claudian-settings.json
           return JSON.stringify({
-            lastEnvHash: 'old-hash',
-            environmentVariables: 'ANTHROPIC_BASE_URL=https://api.example.com',
+            settingsProvider: 'claude',
+            providerConfigs: {
+              claude: {
+                environmentHash: 'old-hash',
+                environmentVariables: 'ANTHROPIC_BASE_URL=https://api.example.com',
+              },
+            },
           });
         }
         if (path === '.claudian/sessions/conv-saved-1.meta.json') {

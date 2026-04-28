@@ -13,9 +13,15 @@ import { InstructionRefineService } from '@/providers/claude/auxiliary/ClaudeIns
 function createMockPlugin(settings = {}) {
   return {
     settings: {
+      settingsProvider: 'claude',
       model: 'sonnet',
       thinkingBudget: 'off',
       systemPrompt: '',
+      providerConfigs: {
+        claude: {
+          customModels: 'custom-model',
+        },
+      },
       ...settings,
     },
     app: {

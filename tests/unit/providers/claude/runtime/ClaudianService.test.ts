@@ -48,6 +48,7 @@ describe('ClaudianService', () => {
       },
       storage: storageMock,
       settings: {
+        settingsProvider: 'claude',
         model: 'claude-3-5-sonnet',
         permissionMode: 'ask' as const,
         thinkingBudget: 0,
@@ -58,6 +59,14 @@ describe('ClaudianService', () => {
         claudeCliPaths: [],
         enableAutoTitleGeneration: true,
         titleGenerationModel: 'claude-3-5-haiku',
+        providerConfigs: {
+          claude: {
+            customModels: 'custom-model',
+          },
+        },
+        savedProviderModel: {
+          claude: 'claude-3-5-sonnet',
+        },
       },
       getResolvedProviderCliPath: jest.fn().mockReturnValue('/usr/local/bin/claude'),
       getActiveEnvironmentVariables: jest.fn().mockReturnValue(''),
