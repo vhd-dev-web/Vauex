@@ -8,6 +8,7 @@ import { DEFAULT_CHAT_PROVIDER_ID, type ProviderId } from '../../core/providers/
 import { VIEW_TYPE_CLAUDIAN } from '../../core/types';
 import type ClaudianPlugin from '../../main';
 import { createProviderIconSvg } from '../../shared/icons';
+import { VAUEX_ICON_ID } from '../../shared/vauexIcon';
 import type { HistoryConversationOpenState } from './controllers/ConversationController';
 import { getTabProviderId, onProviderAvailabilityChanged, updatePlanModeUI } from './tabs/Tab';
 import { TabBar } from './tabs/TabBar';
@@ -81,7 +82,7 @@ export class ClaudianView extends ItemView {
   }
 
   getIcon(): string {
-    return 'bot';
+    return VAUEX_ICON_ID;
   }
 
   /** Refreshes model-dependent UI across all tabs (used after settings/env changes). */

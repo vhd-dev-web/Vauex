@@ -1,8 +1,10 @@
+import { addIcon } from 'obsidian';
 
 import { TOOL_SUBAGENT } from '@/core/tools/toolNames';
 import { VIEW_TYPE_CLAUDIAN } from '@/core/types';
 import * as sdkSession from '@/providers/claude/history/ClaudeHistoryStore';
 import { DEFAULT_SETTINGS } from '@/providers/claude/types/settings';
+import { VAUEX_ICON_ID, VAUEX_ICON_SVG } from '@/shared/vauexIcon';
 
 // Mock fs for ClaudianService
 jest.mock('fs');
@@ -91,8 +93,9 @@ describe('ClaudianPlugin', () => {
     it('should add ribbon icon', async () => {
       await plugin.onload();
 
+      expect(addIcon).toHaveBeenCalledWith(VAUEX_ICON_ID, VAUEX_ICON_SVG);
       expect((plugin.addRibbonIcon as jest.Mock)).toHaveBeenCalledWith(
-        'bot',
+        VAUEX_ICON_ID,
         'Open Vauex',
         expect.any(Function)
       );

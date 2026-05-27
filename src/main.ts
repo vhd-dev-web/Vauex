@@ -5,7 +5,7 @@ patchSetMaxListenersForElectron();
 import './providers';
 
 import type { Editor } from 'obsidian';
-import { MarkdownView, Notice, Plugin } from 'obsidian';
+import { addIcon, MarkdownView, Notice, Plugin } from 'obsidian';
 
 import { DEFAULT_CLAUDIAN_SETTINGS } from './app/settings/defaultSettings';
 import { SharedStorageService } from './app/storage/SharedStorageService';
@@ -36,6 +36,7 @@ import { ClaudianSettingTab } from './features/settings/ClaudianSettings';
 import { setLocale } from './i18n/i18n';
 import type { Locale } from './i18n/types';
 import { OPENCODE_PLAN_MODE_ID, OPENCODE_SAFE_MODE_ID } from './providers/opencode/modes';
+import { VAUEX_ICON_ID, VAUEX_ICON_SVG } from './shared/vauexIcon';
 import { buildCursorContext } from './utils/editor';
 import { getVaultPath } from './utils/path';
 
@@ -48,13 +49,14 @@ export default class ClaudianPlugin extends Plugin {
   async onload() {
     await this.loadSettings();
     await ProviderWorkspaceRegistry.initializeAll(this);
+    addIcon(VAUEX_ICON_ID, VAUEX_ICON_SVG);
 
     this.registerView(
       VIEW_TYPE_CLAUDIAN,
       (leaf) => new ClaudianView(leaf, this)
     );
 
-    this.addRibbonIcon('bot', 'Open Vauex', () => {
+    this.addRibbonIcon(VAUEX_ICON_ID, 'Open Vauex', () => {
       this.activateView();
     });
 
